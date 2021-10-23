@@ -1,0 +1,33 @@
+@import "_variables.scss";
+@import "_mixins.scss";
+@import "_buttons.scss";
+@import "_login.scss";
+@import "_dashboard.scss";
+@import "_login.scss";
+@import "_input.scss";
+
+body {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+	background-color: #fdfdfd;
+}
+
+code {
+	font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+a {
+	text-decoration: none;
+}
+
+input {
+	outline: none;
+	border: none;
+}
+
+button {
+	border: none;
+	outline: none;
+}

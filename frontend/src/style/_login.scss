@@ -1,0 +1,20 @@
+.auth-screen {
+	height: 100vh;
+	.row {
+		align-items: center;
+	}
+	img {
+		height: 550px;
+		object-fit: contain;
+	}
+	.auth-form-box {
+		border: 1px solid $color-light-gray;
+		border-radius: 30px;
+		padding: 10px 2rem;
+		.auth-form-head {
+			display: row;
+			justify-content: center;
+			align-items: flex-start;
+		}
+	}
+}
