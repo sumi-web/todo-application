@@ -1,33 +1,43 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+
 import TodoImage from "../assets/todo.PNG";
-import Input from "../components/common/Input";
+import Login from "../components/dashboard/Login";
+import SignUp from "../components/dashboard/SignUp";
 
 const AuthScreen = () => {
+	const [isSignUpFormVisible, setShowSignUpForm] = useState(false);
+
+	console.log(isSignUpFormVisible);
+
+	const hideSignUpForm = () => {
+		setShowSignUpForm(false);
+	};
+
+	const showSignUpForm = () => {
+		setShowSignUpForm(true);
+	};
+
+	console.log(isSignUpFormVisible);
+
 	return (
-		<div className="auth-screen container-sm">
-			<div className="row">
-				<div className="col-md-6">
-					<img src={TodoImage} />
-				</div>
-				<div className="col-md-6">
-					<div className="auth-form-box">
-						<div className="auth-form-head">
-							<span>Log In</span>
-							<span>Sign Up</span>
+		<>
+			<div className="auth-screen">
+				<div className="container">
+					<div className="row">
+						<div className="col-md-6">
+							<img src={TodoImage} alt="todo" />
 						</div>
-						<div className="form bar"></div>
-
-						<h3>To Continue</h3>
-						<p>we need your Email and Password</p>
-
-						<div className="form-container">
-							<Input name="email" type="text" placeholder="Email" />
-							<Input nam="password" type="password" placeholder="Password" />
+						<div className="col-md-6">
+							{isSignUpFormVisible ? (
+								<SignUp hideSignUpForm={hideSignUpForm} showSignUpForm={showSignUpForm} />
+							) : (
+								<Login hideSignUpForm={hideSignUpForm} showSignUpForm={showSignUpForm} />
+							)}
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
+		</>
 	);
 };
 

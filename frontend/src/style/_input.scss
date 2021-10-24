@@ -1,13 +1,30 @@
 .form-box {
+	position: relative;
 	height: 40px;
 	padding: 0 6px;
 	width: 100%;
-	margin: 10px;
+	margin: 0 0 14px 0;
 	border: 1px solid #cfd6dc;
 	border-radius: 10px;
+	&.error {
+		border-color: $color-danger;
+	}
 	input {
 		width: 100%;
 		height: 100%;
 		padding: 5px;
+	}
+
+	i {
+		position: absolute;
+		top: 12%;
+		right: 6%;
+		color: $color-medium-gray;
+		cursor: pointer;
+		font-size: 1.1rem;
+	}
+
+	&:focus-within {
+		border-color: $color-primary;
 	}
 }

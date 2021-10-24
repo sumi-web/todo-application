@@ -6,5 +6,5 @@ const app = express();
 dotenv.config();
 
 app.listen(30001, (result) => {
-	console.log("server has been started");
+	console.log("server has been started at 30001");
 });
