@@ -1,10 +1,14 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 
 import Input from "../../components/common/Input";
+import { SignUpUser } from "../../action/action-auth";
 
 const SignUp = ({ hideSignUpForm, showSignUpForm }) => {
+	const dispatch = useDispatch();
+
 	const [inputValues, setInputValues] = useState({
-		name: "",
+		fullName: "",
 		email: "",
 		password: "",
 		error: "",
@@ -15,7 +19,7 @@ const SignUp = ({ hideSignUpForm, showSignUpForm }) => {
 
 	const changeInputValues = ({ target: { name, value } }) => {
 		const valuesObj = { ...inputValues, [name]: value };
-		if (valuesObj.name.trim().length > 0 && valuesObj.email.trim().length > 0 && valuesObj.password.trim().length > 0 && !!valuesObj.error) {
+		if (valuesObj.fullName.trim().length > 0 && valuesObj.email.trim().length > 0 && valuesObj.password.trim().length > 0 && !!valuesObj.error) {
 			valuesObj.error = "";
 		}
 
@@ -38,16 +42,16 @@ const SignUp = ({ hideSignUpForm, showSignUpForm }) => {
 		let error = { ...inputError };
 
 		//validation for name
-		if (inputValues.email.trim().length === 0 && inputValues.password.trim().length === 0 && inputValues.name.trim().length === 0) {
+		if (inputValues.email.trim().length === 0 && inputValues.password.trim().length === 0 && inputValues.fullName.trim().length === 0) {
 			setInputValues({ ...inputValues, error: "name, email and password can not be empty" });
-			error.name = "name can not be empty";
+			error.fullName = "name can not be empty";
 			error.email = "email can not be empty";
 			error.password = "password can not be empty";
 		} else {
 			const emailRegex = /\S+@\S+\.\S+/;
 
-			if (inputValues.name.trim().length === 0) {
-				error.name = "name can not be empty";
+			if (inputValues.fullName.trim().length === 0) {
+				error.fullName = "name can not be empty";
 			}
 
 			//validation for email
@@ -66,8 +70,8 @@ const SignUp = ({ hideSignUpForm, showSignUpForm }) => {
 				error.password = "password should be at least 6 characters";
 			}
 
-			if (!!error.name) {
-				setInputValues({ ...inputValues, error: error.name });
+			if (!!error.fullName) {
+				setInputValues({ ...inputValues, error: error.fullName });
 			} else if (!!error.email) {
 				setInputValues({ ...inputValues, error: error.email });
 			} else if (!!error.password) {
@@ -78,13 +82,19 @@ const SignUp = ({ hideSignUpForm, showSignUpForm }) => {
 		return error;
 	};
 
-	const SignUpUser = () => {
+	const userSignUp = async () => {
 		const error = checkErrorsBeforeSaving();
-		console.log("check error", error);
 		if (Object.keys(error).length > 0) {
 			setInputError(error);
 		} else {
-			console.log("submit form");
+			const data = await dispatch(SignUpUser(inputValues.fullName, inputValues.email, inputValues.password));
+			if (data.isLoggedIn) {
+				// do something
+			} else {
+				if (data.error) {
+					setInputValues({ ...inputValues, error: data.error });
+				}
+			}
 		}
 	};
 	return (
@@ -98,9 +108,9 @@ const SignUp = ({ hideSignUpForm, showSignUpForm }) => {
 			<div className="form-inner-box">
 				<div className="form-container">
 					<Input
-						name="name"
+						name="fullName"
 						type="text"
-						placeholder="Name"
+						placeholder="FullName"
 						error={!!inputError.name}
 						value={inputValues.name}
 						onFocus={deleteError}
@@ -132,7 +142,7 @@ const SignUp = ({ hideSignUpForm, showSignUpForm }) => {
 						{inputValues.error}
 					</span>
 				</div>
-				<button type="button" onClick={SignUpUser}>
+				<button type="button" onClick={userSignUp}>
 					Log In
 				</button>
 

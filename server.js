@@ -1,10 +1,28 @@
 import express from "express";
 import dotenv from "dotenv";
+import authRouter from "./src/routers/auth.js";
+import mongoose from "mongoose";
+
 // init app
 const app = express();
 // config .env file
 dotenv.config();
 
-app.listen(30001, (result) => {
-	console.log("server has been started at 30001");
+//connect to mongoDB
+mongoose
+	.connect(process.env.SERVER_DB_URL)
+	.then(() => {
+		app.listen(3001, (result) => {
+			console.log("mongoDb connect and server has been started at 3001");
+		});
+	})
+	.catch((err) => console.log("error in connecting in db"));
+
+//middleware
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use("/auth", authRouter);
+//middleware for handling 404 page
+app.use((req, res) => {
+	res.status(404).send("404 page found");
 });
