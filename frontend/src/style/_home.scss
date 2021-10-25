@@ -1,0 +1,82 @@
+#dashboard-screen {
+	display: flex;
+	height: 100vh;
+}
+
+.left-section {
+	flex: 0.2;
+}
+
+.right-section {
+	flex: 0.8;
+}
+
+.main-left-navigation-container {
+	align-self: flex-start;
+	height: 100vh;
+	padding: 10px 75px 10px 50px;
+	background-color: white;
+	position: sticky;
+	top: 0;
+	border-right: 2px solid #f1f1f1;
+	animation: slideFromLeft 0.2s ease-in-out;
+}
+
+@keyframes slideFromLeft {
+	from {
+		transform: translateX(-300px);
+	}
+	to {
+		transform: translateX(0);
+	}
+}
+
+.main-left-navigation {
+	height: 100%;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.nav-link {
+	color: black;
+	opacity: 0.6;
+	display: flex;
+	align-items: flex-end;
+	gap: 23px;
+}
+
+.nav-link:hover {
+	opacity: 0.8;
+}
+
+.nav-logo {
+	font-size: 1.6rem;
+}
+
+.nav-icon {
+	font-size: 1.5rem;
+}
+
+.nav-link-group > * {
+	display: block;
+	margin-bottom: 40px;
+}
+
+.nav-active .nav-link {
+	color: black;
+	font-weight: bold;
+	opacity: 1;
+}
+
+.nav-active .nav-link::after {
+	content: "";
+	cursor: auto;
+	border: 2px solid var(--idcgreen);
+	height: 35px;
+	position: absolute;
+	right: -76px;
+	border-radius: 50px;
+	transform: translateY(10px);
+}

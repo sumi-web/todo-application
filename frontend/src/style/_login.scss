@@ -18,11 +18,24 @@
 			justify-content: center;
 			align-items: flex-start;
 			span {
-				color: $black-secondary;
+				position: relative;
+				color: $color-light-gray;
 				font-weight: 500;
 				font-size: 1.2rem;
 				margin: 0 10px;
 				cursor: pointer;
+				&.active {
+					color: $black-secondary;
+					&::before {
+						content: "";
+						position: absolute;
+						bottom: 0;
+						left: 0;
+						width: 15px;
+						height: 3px;
+						background-color: #274662;
+					}
+				}
 			}
 		}
 		.form-bar {
@@ -66,6 +79,11 @@
 			color: $white;
 			background-color: $color-primary;
 			border-radius: 6px;
+			&.disabled,
+			&[disabled] {
+				opacity: 0.7;
+				cursor: default;
+			}
 		}
 	}
 }

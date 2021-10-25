@@ -1,22 +1,34 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 
-import Input from "../../components/common/Input";
+import Checkbox from "../common/Checkbox";
+import Input from "../common/Input";
 
-const Login = ({ showSignUpForm, hideSignUpForm }) => {
+import { useHistory } from "react-router-dom";
+
+import { SignUpUser } from "../../action/action-auth";
+import FormHead from "../common/FormHead";
+const SignUp = () => {
+	const history = useHistory();
+
+	const dispatch = useDispatch();
+
+	const [isChecked, setIsChecked] = useState(false);
+
 	const [inputValues, setInputValues] = useState({
+		fullName: "",
 		email: "",
 		password: "",
 		error: "",
+		isLoading: false,
 		isPasswordVisible: false,
 	});
 
 	const [inputError, setInputError] = useState({});
 
-	console.log("check inputValues", inputValues);
-
 	const changeInputValues = ({ target: { name, value } }) => {
 		const valuesObj = { ...inputValues, [name]: value };
-		if (valuesObj.email.trim().length > 0 && valuesObj.password.trim().length > 0 && !!valuesObj.error) {
+		if (valuesObj.fullName.trim().length > 0 && valuesObj.email.trim().length > 0 && valuesObj.password.trim().length > 0 && !!valuesObj.error) {
 			valuesObj.error = "";
 		}
 
@@ -35,16 +47,28 @@ const Login = ({ showSignUpForm, hideSignUpForm }) => {
 		}
 	};
 
+	const handleEnterKey = ({ keyCode }) => {
+		if (keyCode === 13) {
+			userSignUp();
+		}
+	};
+
 	const checkErrorsBeforeSaving = () => {
 		let error = { ...inputError };
 
 		//validation for name
-		if (inputValues.email.trim().length === 0 && inputValues.password.trim().length === 0) {
-			setInputValues({ ...inputValues, error: "email and password can not be empty" });
+		if (inputValues.email.trim().length === 0 && inputValues.password.trim().length === 0 && inputValues.fullName.trim().length === 0) {
+			setInputValues({ ...inputValues, error: "name, email and password can not be empty" });
+			error.fullName = "name can not be empty";
 			error.email = "email can not be empty";
 			error.password = "password can not be empty";
 		} else {
 			const emailRegex = /\S+@\S+\.\S+/;
+
+			if (inputValues.fullName.trim().length === 0) {
+				error.fullName = "name can not be empty";
+			}
+
 			//validation for email
 			if (inputValues.email.trim().length === "") {
 				error.email = "email can not be empty";
@@ -55,14 +79,17 @@ const Login = ({ showSignUpForm, hideSignUpForm }) => {
 			}
 
 			//validation password
-
 			if (inputValues.password.trim().length === 0) {
 				error.password = "password can not be empty";
 			} else if (inputValues.password.trim().length <= 5) {
 				error.password = "password should be at least 6 characters";
 			}
 
-			if (!error.email) {
+			if (!!error.fullName) {
+				setInputValues({ ...inputValues, error: error.fullName });
+			} else if (!!error.email) {
+				setInputValues({ ...inputValues, error: error.email });
+			} else if (!!error.password) {
 				setInputValues({ ...inputValues, error: error.password });
 			}
 		}
@@ -70,38 +97,35 @@ const Login = ({ showSignUpForm, hideSignUpForm }) => {
 		return error;
 	};
 
-	const logInUser = () => {
+	const userSignUp = async () => {
+		if (inputValues.isLoading) return;
 		const error = checkErrorsBeforeSaving();
-		console.log("check error", error);
+
 		if (Object.keys(error).length > 0) {
 			setInputError(error);
 		} else {
-			console.log("submit form");
+			const data = await dispatch(SignUpUser(inputValues.fullName, inputValues.email, inputValues.password));
+			if (data.isLoggedIn) {
+				// navigate to dashboard
+				history.push("/home");
+			} else {
+				if (data.error === "email already exist") {
+					setInputValues({ ...inputValues, error: data.error });
+					setInputError({ ...inputError, email: data.error });
+				}
+			}
 		}
 	};
-
 	return (
 		<div className="auth-form-box">
-			<div className="auth-form-head">
-				<span onClick={hideSignUpForm}>Log In</span>
-				<span onClick={showSignUpForm}>Sign Up</span>
-			</div>
+			<FormHead />
+
 			<div className="form-bar"></div>
 
 			<div className="form-inner-box">
-				<h6>To Continue</h6>
-				<p>We need your email and password</p>
-
 				<div className="form-container">
-					<Input
-						name="email"
-						type="text"
-						placeholder="Email"
-						error={!!inputError.email}
-						value={inputValues.email}
-						onFocus={deleteError}
-						onChange={changeInputValues}
-					/>
+					<Input name="fullName" type="text" placeholder="FullName" error={!!inputError.name} value={inputValues.name} onFocus={deleteError} onChange={changeInputValues} />
+					<Input name="email" type="text" placeholder="Email" error={!!inputError.email} value={inputValues.email} onFocus={deleteError} onChange={changeInputValues} />
 
 					<Input
 						name="password"
@@ -113,32 +137,27 @@ const Login = ({ showSignUpForm, hideSignUpForm }) => {
 						value={inputValues.password}
 						onChange={changeInputValues}
 						onFocus={deleteError}
+						onKeyUp={handleEnterKey}
 					/>
 					<span className={!!inputValues.error ? "visible" : "hidden"}>
 						<i class="bi bi-exclamation-circle"></i>
 						{inputValues.error}
 					</span>
 				</div>
-				<button type="button" onClick={logInUser}>
-					Log In
+				<button disabled={inputValues.isLoading} type="button" onClick={userSignUp}>
+					{inputValues.isLoading ? (
+						<div class="spinner-border text-light spinner-border-sm" role="status">
+							<span class="visually-hidden">Loading...</span>
+						</div>
+					) : (
+						"Sign Up"
+					)}
 				</button>
 
-				<div className="checkbox-input-box">
-					<label class="checkbox">
-						<span class="checkbox__input">
-							<input type="checkbox" name="checkbox" checked />
-							<span class="checkbox__control">
-								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-									<path fill="none" stroke="currentColor" stroke-width="3" d="M1.73 12.91l6.37 6.37L22.79 4.59" />
-								</svg>
-							</span>
-						</span>
-					</label>
-					<small className="remember">Remember Me</small>
-				</div>
+				<Checkbox isChecked={isChecked} changeCheck={() => setIsChecked((prev) => !prev)} />
 			</div>
 		</div>
 	);
 };
 
-export default Login;
+export default SignUp;

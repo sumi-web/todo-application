@@ -1,7 +1,9 @@
 import express from "express";
 import dotenv from "dotenv";
-import authRouter from "./src/routers/auth.js";
 import mongoose from "mongoose";
+import cookieParser from "cookie-parser";
+
+import authRouter from "./src/routers/auth.js";
 
 // init app
 const app = express();
@@ -21,6 +23,8 @@ mongoose
 //middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
+
 app.use("/auth", authRouter);
 //middleware for handling 404 page
 app.use((req, res) => {
