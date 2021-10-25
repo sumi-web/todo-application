@@ -19,30 +19,30 @@ const LeftSection = () => {
 	};
 
 	return (
-		<div className="main-left-navigation-container">
-			<div className="main-left-navigation">
-				<div className="nav-link-group">
-					<p className="nav-logo">.taskEZ</p>
-					{leftTopNav.map(({ IconClass, title, url }) => (
-						<NavLink key={title} to={"/main" + url} activeClassName="nav-active">
+		<div className="sidebar-container">
+			<div className="sidebar-navigation-container">
+				<div className="nav-link-box top">
+					<p className="nav-title">.taskEZ</p>
+					{leftTopNav.map((data, i) => (
+						<NavLink key={i} to={"/home" + data.url} activeClassName="nav-active">
 							<div className="nav-link">
-								<i className={IconClass}></i>
-								<span className="nav-title">{title}</span>
+								<i className={data.IconClass}></i>
+								<span>{data.title}</span>
 							</div>
 						</NavLink>
 					))}
 				</div>
-				<div className="nav-link-group nav-bottom-link">
-					<NavLink to="/main/settings" activeClassName="nav-active">
+				<div className="nav-link-box bottom">
+					<NavLink to="/home/settings" activeClassName="nav-active">
 						<div className="nav-link">
 							<i className="bi bi-gear"></i>
-							<span className="nav-title">Settings</span>
+							<span>Settings</span>
 						</div>
 					</NavLink>
 					<div>
-						<div className="nav-link cursor-pointer" onClick={logout}>
+						<div className="nav-link nav-logout" onClick={logout}>
 							<i class="bi bi-arrow-bar-right"></i>
-							<span className="nav-title">Logout</span>
+							<span>Logout</span>
 						</div>
 					</div>
 				</div>

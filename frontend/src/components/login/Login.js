@@ -48,7 +48,6 @@ const Login = () => {
 	};
 
 	const handleEnterKey = ({ keyCode }) => {
-		console.log("key code", keyCode);
 		if (keyCode === 13) {
 			userLogin();
 		}
@@ -103,7 +102,7 @@ const Login = () => {
 
 			if (data.isLoggedIn) {
 				// navigate to home
-				history.push("/home");
+				history.push("/home/projects");
 			} else {
 				if (data.error === "email does not exist") {
 					setInputError({ ...inputError, email: data.error });
@@ -125,7 +124,15 @@ const Login = () => {
 				<p>We need your email and password</p>
 
 				<div className="form-container">
-					<Input name="email" type="text" placeholder="Email" error={!!inputError.email} value={inputValues.email} onFocus={deleteError} onChange={changeInputValues} />
+					<Input
+						name="email"
+						type="text"
+						placeholder="Email"
+						error={!!inputError.email}
+						value={inputValues.email}
+						onFocus={deleteError}
+						onChange={changeInputValues}
+					/>
 
 					<Input
 						name="password"

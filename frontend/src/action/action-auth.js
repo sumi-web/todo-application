@@ -29,7 +29,6 @@ export const LoginUser = (email, password) => async (dispatch) => {
 		});
 
 		const data = await res.json();
-
 		if (data.isLoggedIn) {
 			dispatch({ type: SET_USER_DATA, data: data.user });
 		}
@@ -46,8 +45,12 @@ export const VerifyUserToken = () => async (dispatch) => {
 			credentials: "include",
 		});
 		const data = await res.json();
-		if (data.isLoggedIn) dispatch({ type: SET_USER_DATA, data: data.user });
-		return true;
+
+		if (data.isLoggedIn) {
+			dispatch({ type: SET_USER_DATA, data: data.user });
+			return true;
+		}
+		return false;
 	} catch (err) {
 		return false;
 	}

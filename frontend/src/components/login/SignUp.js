@@ -8,6 +8,7 @@ import { useHistory } from "react-router-dom";
 
 import { SignUpUser } from "../../action/action-auth";
 import FormHead from "../common/FormHead";
+
 const SignUp = () => {
 	const history = useHistory();
 
@@ -107,7 +108,7 @@ const SignUp = () => {
 			const data = await dispatch(SignUpUser(inputValues.fullName, inputValues.email, inputValues.password));
 			if (data.isLoggedIn) {
 				// navigate to dashboard
-				history.push("/home");
+				history.push("/home/projects");
 			} else {
 				if (data.error === "email already exist") {
 					setInputValues({ ...inputValues, error: data.error });
@@ -124,8 +125,24 @@ const SignUp = () => {
 
 			<div className="form-inner-box">
 				<div className="form-container">
-					<Input name="fullName" type="text" placeholder="FullName" error={!!inputError.name} value={inputValues.name} onFocus={deleteError} onChange={changeInputValues} />
-					<Input name="email" type="text" placeholder="Email" error={!!inputError.email} value={inputValues.email} onFocus={deleteError} onChange={changeInputValues} />
+					<Input
+						name="fullName"
+						type="text"
+						placeholder="FullName"
+						error={!!inputError.name}
+						value={inputValues.name}
+						onFocus={deleteError}
+						onChange={changeInputValues}
+					/>
+					<Input
+						name="email"
+						type="text"
+						placeholder="Email"
+						error={!!inputError.email}
+						value={inputValues.email}
+						onFocus={deleteError}
+						onChange={changeInputValues}
+					/>
 
 					<Input
 						name="password"

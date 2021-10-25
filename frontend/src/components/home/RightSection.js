@@ -9,21 +9,23 @@ import Setting from "./setting";
 const RightSection = () => {
 	const { path } = useRouteMatch();
 
-	const location = useLocation();
+	const { pathname } = useLocation();
 
-	console.log("check right section", path, location);
+	console.log("check", pathname);
 
 	return (
 		<>
 			<HeaderBar />
-			<Switch>
-				<Route path={path + "/projects"} component={Projects} />
-				{/* <Route path={path + "/edit-todo"} component={EditTodo} /> */}
-				<Route path={path + "/settings"} component={Setting} />
-				<Route exact path={path}>
-					<Redirect to={path + "/projects"} />
-				</Route>
-			</Switch>
+			<Projects />
+
+			{/* <Switch> */}
+			{/* <Route path={pathname + "/projects"} component={Projects} /> */}
+			{/* <Route path={path + "/edit-todo"} component={EditTodo} /> */}
+			{/* <Route path={pathname + "/settings"} component={Setting} /> */}
+			{/* <Route exact path={pathname}> */}
+			{/* <Redirect to={pathname} /> */}
+			{/* </Route> */}
+			{/* </Switch> */}
 		</>
 	);
 };

@@ -16,7 +16,7 @@ export const userLogin = async (req, res) => {
 	//  create and assign a token
 	const token = jwt.sign({ _id: user._id }, process.env.JWT_TOKEN_SECRET);
 	res.cookie("jwt", token, { maxAge: 1000 * 60 * 60 });
-	res.status(200).json({ isLoggedIn: true, data: user });
+	res.status(200).json({ isLoggedIn: true, user });
 };
 
 // signing up user
@@ -59,12 +59,12 @@ export const verifyToken = (req, res) => {
 			if (err) {
 				res.status(200).json({ isLoggedIn: false });
 			} else {
-				const user = await User.findOne({ _id: decoded.userId });
-				res.status(200).json({ isLoggedIn: true, data: user });
+				const user = await User.findOne({ _id: decoded._id });
+				res.status(200).json({ isLoggedIn: true, user });
 			}
 		});
 	} else {
-		res.send({ isLoggedIn: false });
+		res.status(200).json({ isLoggedIn: false });
 	}
 };
 

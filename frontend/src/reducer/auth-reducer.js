@@ -9,6 +9,7 @@ export function authReducer(state = INITIAL_STATE, action) {
 	let newState = { ...state };
 
 	if (action.type === SET_USER_DATA) {
+		console.log("check user saved", action.data);
 		newState.authCredentials = action.data;
 		return newState;
 	}
