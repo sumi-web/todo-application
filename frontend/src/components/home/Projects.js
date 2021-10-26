@@ -1,22 +1,28 @@
-import React from "react";
+import React, { useEffect } from "react";
+
+import { useDispatch, useSelector } from "react-redux";
+import { GetAllTodo } from "../../action/action-todo";
+
 import TodoContainer from "./projects/TodoContainer";
 
 const Projects = () => {
-	return (
-		<div className="todo-project-container">
-			<div className="projects-filter-bar">
-				<h2>Projects</h2>
-				<div className="filter-container">
-					<i class="bi bi-filter"></i>
-					<h3>Filter</h3>
-				</div>
-			</div>
+	const dispatch = useDispatch();
 
-			<div className="todo-container-area">
-				<TodoContainer heading="To do" />
-				<TodoContainer heading="In Progress" />
-				<TodoContainer heading="Completed" />
-			</div>
+	useEffect(() => {
+		dispatch(GetAllTodo());
+	}, [dispatch]);
+
+	const todoData = useSelector((state) => ({
+		todoList: state.todo_store.todoList,
+		inProgressList: state.todo_store.inProgressList,
+		completedTodo: state.todo_store.completedTodo,
+	}));
+
+	return (
+		<div className="todo-container-area">
+			<TodoContainer heading="To do" todoData={todoData.todoList} />
+			<TodoContainer heading="In Progress" todoData={todoData.inProgressList} />
+			<TodoContainer heading="Completed" todoData={todoData.completedTodo} />
 		</div>
 	);
 };

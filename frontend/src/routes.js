@@ -11,7 +11,7 @@ const Routes = () => {
 	const dispatch = useDispatch();
 	const history = useHistory();
 
-	const isLoggedIn = useSelector((state) => state.auth_store.isLoggedIn);
+	const isLoggedIn = useSelector((state) => state.auth_store.authCredentials._id || false);
 
 	useEffect(() => {
 		async function verifyToken() {

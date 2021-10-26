@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
 
 import authRouter from "./src/routers/auth.js";
+import todoRouter from "./src/routers/todo.js";
 
 // init app
 const app = express();
@@ -25,8 +26,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
+// routing middleware
 app.use("/auth", authRouter);
+app.use("/home", todoRouter);
 //middleware for handling 404 page
+
 app.use((req, res) => {
 	res.status(404).send("404 page found");
 });

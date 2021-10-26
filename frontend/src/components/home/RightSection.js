@@ -16,16 +16,15 @@ const RightSection = () => {
 	return (
 		<>
 			<HeaderBar />
-			<Projects />
 
-			{/* <Switch> */}
-			{/* <Route path={pathname + "/projects"} component={Projects} /> */}
-			{/* <Route path={path + "/edit-todo"} component={EditTodo} /> */}
-			{/* <Route path={pathname + "/settings"} component={Setting} /> */}
-			{/* <Route exact path={pathname}> */}
-			{/* <Redirect to={pathname} /> */}
-			{/* </Route> */}
-			{/* </Switch> */}
+			<Switch>
+				<Route path={path + "/projects"} component={Projects} />
+				{/* <Route path={path + "/edit-todo"} component={EditTodo} /> */}
+				<Route path={path + "/settings"} component={Setting} />
+				<Route exact path={path}>
+					<Redirect to={path + "/projects"} />
+				</Route>
+			</Switch>
 		</>
 	);
 };

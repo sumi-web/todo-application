@@ -12,14 +12,26 @@ const HeaderBar = () => {
 
 	return (
 		<div className="top-header-bar">
-			<div className="search-box">
-				<SearchBox placeholder="Search.." />
+			<div className="top">
+				<div className="search-box">
+					<SearchBox placeholder="Search.." />
+				</div>
+				<div className="user-info-images">
+					<img className="all-images" src={AllImages} alt="all-images" />
+					<div className="user-info">
+						<h1>Hi {userInfo.name}</h1>
+						<img src={UserImage} alt="user" />
+					</div>
+				</div>
 			</div>
-			<div className="user-info-images">
-				<img className="all-images" src={AllImages} alt="all-images" />
-				<div className="user-info">
-					<h1>Hi {userInfo.name}</h1>
-					<img src={UserImage} alt="user" />
+
+			<div className="bottom">
+				<div className="projects-filter-bar">
+					<h2>Projects</h2>
+					<div className="filter-container">
+						<i class="bi bi-filter"></i>
+						<h3>Filter</h3>
+					</div>
 				</div>
 			</div>
 		</div>

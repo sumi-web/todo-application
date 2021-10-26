@@ -1,2 +1,9 @@
+/******* auth *******/
 export const SET_USER_DATA = "SET_USER_DATA";
 export const TOGGLE_BETWEEN_LOGIN_AND_SIGNUP_FORM = "TOGGLE_BETWEEN_LOGIN_AND_SIGNUP_FORM";
+
+/***** todo  ******/
+export const CREATE_EMPTY_TOKEN = "CREATE_EMPTY_TOKEN";
+export const REMOVE_EMPTY_TODO_CARD = "REMOVE_EMPTY_TODO_CARD";
+export const SET_CREATED_TODO = "SET_CREATED_TODO";
+export const SET_ALL_TODO = "SET_ALL_TODO";
