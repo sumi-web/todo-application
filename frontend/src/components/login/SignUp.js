@@ -103,7 +103,10 @@ const SignUp = () => {
 		if (Object.keys(error).length > 0) {
 			setInputError(error);
 		} else {
+			setInputValues({ ...inputValues, isLoading: true });
 			const data = await dispatch(SignUpUser(inputValues.fullName, inputValues.email, inputValues.password));
+
+			setInputValues({ ...inputValues, isLoading: false });
 			if (data.isLoggedIn) {
 				// navigate to dashboard
 				history.push("/home/projects");
@@ -155,7 +158,7 @@ const SignUp = () => {
 						onKeyUp={handleEnterKey}
 					/>
 					<span className={!!inputValues.error ? "visible" : "hidden"}>
-						<i class="bi bi-exclamation-circle"></i>
+						<i className="bi bi-exclamation-circle"></i>
 						{inputValues.error}
 					</span>
 				</div>

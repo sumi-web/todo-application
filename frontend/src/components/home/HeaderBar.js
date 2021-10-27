@@ -2,7 +2,7 @@ import React from "react";
 
 import SearchBox from "../common/SearchBox";
 import AllImages from "../../assets/all-images.png";
-import UserImage from "../../assets/photo-1494790108377-be9c29b29330.jfif";
+import UserImage from "../../assets/847969.png";
 import { useSelector } from "react-redux";
 
 const HeaderBar = () => {
@@ -29,7 +29,7 @@ const HeaderBar = () => {
 				<div className="projects-filter-bar">
 					<h2>Projects</h2>
 					<div className="filter-container">
-						<i class="bi bi-filter"></i>
+						<i className="bi bi-filter"></i>
 						<h3>Filter</h3>
 					</div>
 				</div>

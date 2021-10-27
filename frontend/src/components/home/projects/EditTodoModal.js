@@ -38,8 +38,6 @@ const EditTodoModal = ({ isOpen, isLocked, onClose, action }) => {
 		setInputValues({ title: "", desc: "", isLoading: false });
 	};
 
-	console.log(todoData);
-
 	return (
 		<Modal open={isOpen} locked={isLocked} onClose={onclose}>
 			<div className="edit-todo-modal">
@@ -57,7 +55,12 @@ const EditTodoModal = ({ isOpen, isLocked, onClose, action }) => {
 					<textarea rows={3} value={inputValues.desc} onChange={changeDesc} />
 				</div>
 
-				<button disabled={inputValues.isLoading} onClick={saveEditedTodoDetails}>
+				<button
+					disabled={
+						inputValues.isLoading || !inputValues.title || (inputValues.title === todoData.title && inputValues.desc === todoData.desc) || !inputValues.desc
+					}
+					onClick={saveEditedTodoDetails}
+				>
 					{inputValues.isLoading ? <Loader /> : "Save"}
 				</button>
 			</div>

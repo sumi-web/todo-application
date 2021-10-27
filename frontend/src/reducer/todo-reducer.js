@@ -1,4 +1,13 @@
-import { CREATE_EMPTY_TOKEN, DELETE_TODO, MOVE_SELECTED_TODO_CARD, REMOVE_EMPTY_TODO_CARD, SET_ALL_TODO, SET_CREATED_TODO, SET_EDIT_TODO_DATA, UPDATE_TODO } from "../action/type";
+import {
+	CREATE_EMPTY_TOKEN,
+	DELETE_TODO,
+	MOVE_SELECTED_TODO_CARD,
+	REMOVE_EMPTY_TODO_CARD,
+	SET_ALL_TODO,
+	SET_CREATED_TODO,
+	SET_EDIT_TODO_DATA,
+	UPDATE_TODO,
+} from "../action/type";
 
 const INITIAL_STATE = {
 	editTodo: {},
@@ -29,7 +38,8 @@ export function todoReducer(state = INITIAL_STATE, action) {
 	}
 
 	if (action.type === SET_CREATED_TODO) {
-		const newList = state[action.status].list.slice(1);
+		debugger;
+		const newList = state[action.status].list.filter((item) => item.title !== "" && item.desc !== "");
 		newState[action.status].list = [action.todo, ...newList];
 
 		return newState;
@@ -51,7 +61,7 @@ export function todoReducer(state = INITIAL_STATE, action) {
 				newDragCard.status = action.to.droppableId;
 
 				const destinationList = [...state[action.to.droppableId].list];
-			
+
 				newState[action.from.droppableId].list = state[action.from.droppableId].list.filter((item) => item._id !== action.dragId);
 				destinationList.splice(action.to.index, 0, newDragCard);
 				newState[action.to.droppableId].list = destinationList;
@@ -59,7 +69,7 @@ export function todoReducer(state = INITIAL_STATE, action) {
 				const targetList = [...state[action.to.droppableId].list];
 				targetList.splice(action.from.index, 1);
 				targetList.splice(action.to.index, 0, findDragCard);
-				newState.[action.to.droppableId].list=targetList
+				newState[action.to.droppableId].list = targetList;
 			}
 		}
 
@@ -67,24 +77,25 @@ export function todoReducer(state = INITIAL_STATE, action) {
 	}
 
 	if (action.type === DELETE_TODO) {
-		debugger
-		newState[action.status].list = state[action.status].list.filter(todo => todo._id !== action.todoId)
-		
-		return newState
+		debugger;
+		newState[action.status].list = state[action.status].list.filter((todo) => todo._id !== action.todoId);
 
+		return newState;
 	}
 
-	if (action.type===SET_EDIT_TODO_DATA) {
-		const todoData = state[action.status].list.find(todo => todo._id === action.todoId)
-		newState.editTodo = {...todoData,userName:action.userName}
-		return newState
+	if (action.type === SET_EDIT_TODO_DATA) {
+		const todoData = state[action.status].list.find((todo) => todo._id === action.todoId);
+		newState.editTodo = { ...todoData, userName: action.userName };
+		return newState;
 	}
 
-	if (action.type===UPDATE_TODO) {
-		newState[action.data.status].list = state.[action.data.status].list.map(todo => todo._id === action.data._id ? { ...todo, ...action.data } : {...todo})
+	if (action.type === UPDATE_TODO) {
+		newState[action.data.status].list = state[action.data.status].list.map((todo) =>
+			todo._id === action.data._id ? { ...todo, ...action.data } : { ...todo }
+		);
 
-		newState.editTodo = {}
-		return newState
+		newState.editTodo = {};
+		return newState;
 	}
 
 	return newState;

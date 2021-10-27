@@ -46,7 +46,7 @@ const TodoCard = ({ userId, todoId, title, description, status, ...props }) => {
 				<h1>By {userName}</h1>
 				<div className="card-btn">
 					<button className="edit-card" onClick={openEditModal}>
-						<i class="bi bi-box-arrow-in-down-left"></i>
+						<i className="bi bi-pencil-square"></i>
 					</button>
 					<button className="delete-card" onClick={() => setDelState({ ...delState, isOpen: true })}>
 						<i className="bi bi-trash"></i>

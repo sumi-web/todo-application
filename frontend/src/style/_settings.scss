@@ -1,0 +1,55 @@
+.setting-screen {
+	@include applyFlex(flex-start, center);
+	flex-direction: column;
+	padding: 4rem 0;
+
+	.user-image {
+		margin-bottom: 3rem;
+		img {
+			height: 150px;
+			object-fit: contain;
+		}
+	}
+
+	button {
+		width: 100px;
+		@include buttonVariant(1.2rem, $white, $color-primary, 5px);
+		// text-align: center;
+		margin: 1rem auto 0 auto;
+		padding: 0.3rem 1rem;
+	}
+
+	.user-info-box {
+		width: 350px;
+		.name-box,
+		.email-box {
+			position: relative;
+			@include applyFlex(flex-start, flex-start);
+			flex-direction: column;
+			margin-bottom: 2.5rem;
+
+			i {
+				position: absolute;
+				top: 0;
+				right: 0;
+				color: $color-primary;
+				font-size: 1.1rem;
+				cursor: pointer;
+				font-weight: 500;
+			}
+		}
+
+		label {
+			font-size: 1.1rem;
+			font-family: "Montserrat", sans-serif;
+			margin-bottom: 0.8rem;
+			font-weight: 500;
+			color: $black-secondary;
+		}
+
+		h4 {
+			font-size: 0.9rem;
+			color: #333;
+		}
+	}
+}

@@ -213,6 +213,7 @@
 
 	// todo styling
 	.todo-card {
+		animation: fade-anim 0.5s ease;
 		cursor: pointer;
 		width: 100%;
 		background-color: $white;
@@ -450,5 +451,14 @@
 	}
 	to {
 		transform: translateX(0);
+	}
+}
+
+@keyframes fade-anim {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
 	}
 }

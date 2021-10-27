@@ -60,9 +60,13 @@ export const VerifyUserToken = () => async (dispatch) => {
 export const ToggleBetweenLoginAndSignUpForm = (value) => ({ type: TOGGLE_BETWEEN_LOGIN_AND_SIGNUP_FORM, value });
 
 export const UserLogout = () => async (dispatch) => {
-	await fetch("/auth/logout");
+	try {
+		await fetch("/auth/logout");
 
-	dispatch({ type: SET_USER_DATA, data: {} });
+		dispatch({ type: SET_USER_DATA, data: {} });
+	} catch (err) {
+		console.log("err in logout", err);
+	}
 };
 
 export const GetAllUsers = () => async (dispatch) => {
@@ -73,5 +77,25 @@ export const GetAllUsers = () => async (dispatch) => {
 		dispatch({ type: SET_ALL_USERS, users: data.data });
 	} catch (err) {
 		console.log("err found in getting all users", err);
+	}
+};
+
+export const UpdateUserInfo = (name, email) => async (dispatch, getState) => {
+	const userId = getState().auth_store.authCredentials._id;
+
+	try {
+		const res = await fetch("/auth/update-user", {
+			method: "PATCH",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({ userId, data: { name, email } }),
+		});
+
+		const data = await res.json();
+
+		if (data.success) {
+			dispatch({ type: SET_USER_DATA, data: data.user });
+		}
+	} catch (err) {
+		console.log("err in updating user info", err);
 	}
 };

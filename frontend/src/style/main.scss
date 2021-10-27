@@ -4,6 +4,7 @@
 @import "_home.scss";
 @import "_login.scss";
 @import "_input.scss";
+@import "_settings.scss";
 
 @import url("https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700;800;900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap");
@@ -132,7 +133,7 @@ button {
 		max-width: 80%;
 		box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 		background-color: white;
-		border-radius: 2px;
+		border-radius: 5px;
 		transform: translateY(100px);
 		transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
 		opacity: 0;
