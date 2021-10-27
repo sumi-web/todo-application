@@ -1,25 +1,41 @@
 import React, { useState } from "react";
+
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 
-import { DeleteTodo } from "../../action/action-todo";
-
 import ConfirmModal from "./ConfirmModal";
+import EditTodoModal from "../home/projects/EditTodoModal";
+
+import { DeleteTodo, SetEditModalData } from "../../action/action-todo";
 
 const TodoCard = ({ userId, todoId, title, description, status, ...props }) => {
 	const dispatch = useDispatch();
 
-	const [state, setState] = useState({
+	const userName = useSelector((state) => state.auth_store.userList.find((user) => user._id === userId)?.name || "");
+
+	const [delState, setDelState] = useState({
 		isOpen: false,
 		isLoading: false,
 	});
 
-	const userName = useSelector((state) => state.auth_store.userList.find((user) => user._id === userId)?.name || "");
+	const [editState, setEditState] = useState({
+		isOpen: false,
+		isLocked: true,
+	});
+
+	const openEditModal = () => {
+		dispatch(SetEditModalData(userId, todoId, status));
+		setEditState({ ...editState, isOpen: true, isLoading: true });
+	};
+
+	const closeEditModal = () => {
+		setEditState({ ...editState, isOpen: false, isLoading: false });
+	};
 
 	const deleteCard = async () => {
-		setState({ ...state, isLoading: true });
+		setDelState({ ...delState, isLoading: true });
 		await dispatch(DeleteTodo(todoId, status));
-		setState({ isOpen: false, isLoading: false });
+		setDelState({ isOpen: false, isLoading: false });
 	};
 
 	return (
@@ -29,21 +45,22 @@ const TodoCard = ({ userId, todoId, title, description, status, ...props }) => {
 			<div className="card-bottom">
 				<h1>By {userName}</h1>
 				<div className="card-btn">
-					<button className="edit-card">
+					<button className="edit-card" onClick={openEditModal}>
 						<i class="bi bi-box-arrow-in-down-left"></i>
 					</button>
-					<button className="delete-card" onClick={() => setState({ ...state, isOpen: true })}>
+					<button className="delete-card" onClick={() => setDelState({ ...delState, isOpen: true })}>
 						<i className="bi bi-trash"></i>
 					</button>
 				</div>
 			</div>
 			<ConfirmModal
-				isOpen={state.isOpen}
-				isLoading={state.isLoading}
+				isOpen={delState.isOpen}
+				isLoading={delState.isLoading}
 				title="Delete"
-				onClose={() => setState({ ...state, isOpen: false })}
+				onClose={() => setDelState({ ...delState, isOpen: false })}
 				action={deleteCard}
 			/>
+			<EditTodoModal isOpen={editState.isOpen} isLocked={editState.isLocked} onClose={closeEditModal} />
 		</>
 	);
 };

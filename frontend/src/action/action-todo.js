@@ -1,4 +1,13 @@
-import { CREATE_EMPTY_TOKEN, DELETE_TODO, MOVE_SELECTED_TODO_CARD, REMOVE_EMPTY_TODO_CARD, SET_ALL_TODO, SET_CREATED_TODO } from "./type";
+import {
+	CREATE_EMPTY_TOKEN,
+	DELETE_TODO,
+	MOVE_SELECTED_TODO_CARD,
+	REMOVE_EMPTY_TODO_CARD,
+	SET_ALL_TODO,
+	SET_CREATED_TODO,
+	SET_EDIT_TODO_DATA,
+	UPDATE_TODO,
+} from "./type";
 
 export const CreateEmptyTodo = (heading) => ({ type: CREATE_EMPTY_TOKEN, heading });
 
@@ -60,5 +69,36 @@ export const DeleteTodo = (todoId, status) => async (dispatch) => {
 		}
 	} catch (err) {
 		console.log("error in deleting todo", err);
+	}
+};
+
+export const SetEditModalData = (userId, todoId, status) => (dispatch, getState) => {
+	const userList = getState().auth_store.userList;
+
+	const userName = userList.find((user) => user._id === userId).name;
+	if (userName) {
+		dispatch({ type: SET_EDIT_TODO_DATA, todoId, status, userName });
+	} else {
+		console.log("didn't find user todo");
+	}
+};
+
+export const SaveEditedTodoData = (todoId, title, desc) => async (dispatch) => {
+	try {
+		const res = await fetch("/home/update-todo", {
+			method: "PATCH",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({ todoId: todoId, data: { title, desc } }),
+		});
+
+		const data = await res.json();
+
+		console.log("incoming data on edit", data);
+
+		if (data.success) {
+			dispatch({ type: UPDATE_TODO, data: data.data });
+		}
+	} catch (err) {
+		console.log("err in editing todo details", err);
 	}
 };

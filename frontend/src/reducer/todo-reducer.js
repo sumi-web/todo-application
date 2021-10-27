@@ -1,6 +1,7 @@
-import { CREATE_EMPTY_TOKEN, DELETE_TODO, MOVE_SELECTED_TODO_CARD, REMOVE_EMPTY_TODO_CARD, SET_ALL_TODO, SET_CREATED_TODO } from "../action/type";
+import { CREATE_EMPTY_TOKEN, DELETE_TODO, MOVE_SELECTED_TODO_CARD, REMOVE_EMPTY_TODO_CARD, SET_ALL_TODO, SET_CREATED_TODO, SET_EDIT_TODO_DATA, UPDATE_TODO } from "../action/type";
 
 const INITIAL_STATE = {
+	editTodo: {},
 	todo: { heading: "To Do", list: [] },
 	progress: { heading: "In Progress", list: [] },
 	completed: { heading: "Completed", list: [] },
@@ -71,6 +72,19 @@ export function todoReducer(state = INITIAL_STATE, action) {
 		
 		return newState
 
+	}
+
+	if (action.type===SET_EDIT_TODO_DATA) {
+		const todoData = state[action.status].list.find(todo => todo._id === action.todoId)
+		newState.editTodo = {...todoData,userName:action.userName}
+		return newState
+	}
+
+	if (action.type===UPDATE_TODO) {
+		newState[action.data.status].list = state.[action.data.status].list.map(todo => todo._id === action.data._id ? { ...todo, ...action.data } : {...todo})
+
+		newState.editTodo = {}
+		return newState
 	}
 
 	return newState;

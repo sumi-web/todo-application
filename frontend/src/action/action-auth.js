@@ -45,13 +45,14 @@ export const VerifyUserToken = () => async (dispatch) => {
 			credentials: "include",
 		});
 		const data = await res.json();
-
+		console.log("check data", data);
 		if (data.isLoggedIn) {
 			dispatch({ type: SET_USER_DATA, data: data.user });
 			return true;
 		}
 		return false;
 	} catch (err) {
+		console.log("error in verifying token", err);
 		return false;
 	}
 };

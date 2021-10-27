@@ -12,8 +12,4 @@ router.patch("/update-todo", UpdateTodo);
 
 router.get("/delete-todo:todoId", DeleteTodo);
 
-// router.post("/delete-todo");
-
-// router.put("/update-todo");
-
 export default router;

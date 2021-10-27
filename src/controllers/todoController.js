@@ -34,7 +34,7 @@ export const UpdateTodo = async (req, res) => {
 	try {
 		const updateTodo = await Todo.findByIdAndUpdate(todoId, data, { new: true });
 
-		res.status(200).send("success");
+		res.status(200).json({ success: true, data: updateTodo });
 		console.log("check updated todo", updateTodo);
 	} catch (err) {
 		console.log("error in updating todo in server", err);
