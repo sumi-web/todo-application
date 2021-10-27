@@ -6,12 +6,14 @@ import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import TodoContainer from "./projects/TodoContainer";
 
 import { GetAllTodo, MoveSelectedTodoCard } from "../../action/action-todo";
+import { GetAllUsers } from "../../action/action-auth";
 
 const Projects = () => {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
 		dispatch(GetAllTodo());
+		dispatch(GetAllUsers());
 	}, [dispatch]);
 
 	const { todoData, progressData, completedData } = useSelector((state) => ({

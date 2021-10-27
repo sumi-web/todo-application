@@ -72,3 +72,16 @@ export const logoutUser = (req, res) => {
 	res.clearCookie("jwt");
 	res.send({ success: true });
 };
+
+export const GetAllUsers = async (req, res) => {
+	try {
+		const allUsers = await User.find();
+
+		if (allUsers) {
+			res.status(200).json({ data: allUsers });
+		}
+	} catch (err) {
+		console.log("err in getting all users in server", err);
+		res.status(400).send(err);
+	}
+};

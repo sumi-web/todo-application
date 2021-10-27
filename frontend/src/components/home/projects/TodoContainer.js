@@ -2,10 +2,10 @@ import React, { Fragment } from "react";
 
 import { Draggable } from "react-beautiful-dnd";
 
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import TodoCard from "../../common/TodoCard";
-import EmptyTodoCard from "../../common/EmptyTodoCard";
+import EmptyTodoCard from "../projects/EmptyTodoCard";
 
 import { CreateEmptyTodo } from "../../../action/action-todo";
 
@@ -51,7 +51,7 @@ const TodoContainer = ({ heading, todoData }) => {
 										{...provided.draggableProps}
 										{...provided.dragHandleProps}
 									>
-										<TodoCard id={item._id} title={item.title} description={item.desc} status={item.status} />
+										<TodoCard todoId={item._id} userId={item.userId} title={item.title} description={item.desc} status={item.status} />
 									</div>
 								)}
 							</Draggable>

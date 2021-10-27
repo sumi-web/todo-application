@@ -1,4 +1,4 @@
-import { CREATE_EMPTY_TOKEN, MOVE_SELECTED_TODO_CARD, REMOVE_EMPTY_TODO_CARD, SET_ALL_TODO, SET_CREATED_TODO } from "./type";
+import { CREATE_EMPTY_TOKEN, DELETE_TODO, MOVE_SELECTED_TODO_CARD, REMOVE_EMPTY_TODO_CARD, SET_ALL_TODO, SET_CREATED_TODO } from "./type";
 
 export const CreateEmptyTodo = (heading) => ({ type: CREATE_EMPTY_TOKEN, heading });
 
@@ -48,4 +48,17 @@ export const MoveSelectedTodoCard = (dragId, from, to) => async (dispatch) => {
 		headers: { "Content-Type": "application/json" },
 		body: JSON.stringify({ todoId: dragId, data: { status: to.droppableId } }),
 	});
+};
+
+export const DeleteTodo = (todoId, status) => async (dispatch) => {
+	try {
+		const res = await fetch("/home/delete-todo" + todoId);
+		const data = await res.json();
+		console.log("check here", data);
+		if (data.success) {
+			dispatch({ type: DELETE_TODO, todoId, status });
+		}
+	} catch (err) {
+		console.log("error in deleting todo", err);
+	}
 };

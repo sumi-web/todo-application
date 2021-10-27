@@ -1,4 +1,4 @@
-import { CREATE_EMPTY_TOKEN, MOVE_SELECTED_TODO_CARD, REMOVE_EMPTY_TODO_CARD, SET_ALL_TODO, SET_CREATED_TODO } from "../action/type";
+import { CREATE_EMPTY_TOKEN, DELETE_TODO, MOVE_SELECTED_TODO_CARD, REMOVE_EMPTY_TODO_CARD, SET_ALL_TODO, SET_CREATED_TODO } from "../action/type";
 
 const INITIAL_STATE = {
 	todo: { heading: "To Do", list: [] },
@@ -63,6 +63,14 @@ export function todoReducer(state = INITIAL_STATE, action) {
 		}
 
 		return newState;
+	}
+
+	if (action.type === DELETE_TODO) {
+		debugger
+		newState[action.status].list = state[action.status].list.filter(todo => todo._id !== action.todoId)
+		
+		return newState
+
 	}
 
 	return newState;

@@ -168,6 +168,7 @@
 			border-radius: 10px;
 			width: 100%;
 			background-color: $light-bg-green;
+			min-height: 500px;
 			max-height: 530px;
 			overflow-y: auto;
 
@@ -231,8 +232,37 @@
 			color: $color-medium-gray;
 		}
 
-		& > .card-created-by {
-			font-size: 0.4rem;
+		& > .card-bottom {
+			@include applyFlex(space-between, center);
+			h1 {
+				font-size: 0.8rem;
+			}
+
+			.card-btn {
+				display: flex;
+				gap: 20px;
+				button {
+					@include applyFlex(center, center);
+					width: 25px;
+					height: 25px;
+					font-size: 0.8rem;
+					color: #fff;
+					cursor: pointer;
+					border-radius: 5px;
+
+					&.edit-card {
+						background-color: lighten($color-primary, 5%);
+					}
+
+					&.delete-card {
+						background-color: lighten($color-dark-gray, 13%);
+					}
+
+					&:active {
+						transform: scale(0.98);
+					}
+				}
+			}
 		}
 
 		&.empty-card .btn-group {
@@ -248,7 +278,7 @@
 			}
 
 			& > button {
-				padding: 0.2rem 1.5rem;
+				padding: 0.2rem 1.2rem;
 				border-radius: 5px;
 				font-size: 0.98rem;
 				&.disabled,
@@ -280,6 +310,46 @@
 		textarea {
 			width: 100%;
 			font-size: 0.85rem;
+		}
+	}
+}
+
+.confirm-modal {
+	width: 400px;
+	height: 100%;
+	padding: 0.5rem;
+	h2 {
+		font-size: 1.2rem;
+		margin-bottom: 1rem;
+	}
+
+	.confirm-btn {
+		@include applyFlex(flex-end, center);
+		gap: 20px;
+
+		& > button {
+			padding: 0.2rem 1.2rem;
+			border-radius: 5px;
+			font-size: 0.98rem;
+			cursor: pointer;
+
+			&.logout-btn {
+				background-color: $color-primary;
+				color: $white;
+				&:active {
+					background-color: darken($color-primary, 10%);
+				}
+
+				&:disabled,
+				&.disabled {
+					opacity: pointer;
+				}
+			}
+
+			&.cancel-btn {
+				background-color: $white;
+				border: 1px solid $color-light-gray;
+			}
 		}
 	}
 }

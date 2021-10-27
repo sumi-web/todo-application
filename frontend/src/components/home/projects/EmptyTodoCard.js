@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 
 import { useDispatch } from "react-redux";
-import { RemoveEmptyTodo, CreateTodo } from "../../action/action-todo";
+import { RemoveEmptyTodo, CreateTodo } from "../../../action/action-todo";
 
-import Loader from "./Loader";
+import Loader from "../../common/Loader";
 
 const EmptyTodoCard = ({ heading, id }) => {
 	const dispatch = useDispatch();

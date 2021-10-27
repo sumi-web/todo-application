@@ -1,4 +1,4 @@
-import { SET_USER_DATA, SET_USER_FORM_ERROR, TOGGLE_BETWEEN_LOGIN_AND_SIGNUP_FORM } from "./type";
+import { SET_ALL_USERS, SET_USER_DATA, TOGGLE_BETWEEN_LOGIN_AND_SIGNUP_FORM } from "./type";
 
 export const SignUpUser = (fullName, email, password) => async (dispatch) => {
 	try {
@@ -62,4 +62,15 @@ export const UserLogout = () => async (dispatch) => {
 	await fetch("/auth/logout");
 
 	dispatch({ type: SET_USER_DATA, data: {} });
+};
+
+export const GetAllUsers = () => async (dispatch) => {
+	try {
+		const res = await fetch("/auth/all-users");
+		const data = await res.json();
+
+		dispatch({ type: SET_ALL_USERS, users: data.data });
+	} catch (err) {
+		console.log("err found in getting all users", err);
+	}
 };

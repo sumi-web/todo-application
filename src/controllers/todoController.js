@@ -41,3 +41,17 @@ export const UpdateTodo = async (req, res) => {
 		res.status(400).send(err);
 	}
 };
+
+export const DeleteTodo = async (req, res) => {
+	const { todoId } = req.params;
+
+	if (todoId) {
+		try {
+			await Todo.findByIdAndDelete(todoId);
+			res.status(200).json({ success: true });
+		} catch (err) {
+			console.log("err in deleting todo", err);
+			res.status(400).send(err);
+		}
+	}
+};

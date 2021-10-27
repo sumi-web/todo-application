@@ -3,7 +3,7 @@ import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 
 import { authReducer } from "./auth-reducer";
-import { todoReducer } from "./todo_reducer";
+import { todoReducer } from "./todo-reducer";
 
 const reducers = combineReducers({
 	auth_store: authReducer,
