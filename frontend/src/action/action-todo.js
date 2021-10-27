@@ -1,8 +1,8 @@
-import { CREATE_EMPTY_TOKEN, REMOVE_EMPTY_TODO_CARD, SET_ALL_TODO, SET_CREATED_TODO } from "./type";
+import { CREATE_EMPTY_TOKEN, MOVE_SELECTED_TODO_CARD, REMOVE_EMPTY_TODO_CARD, SET_ALL_TODO, SET_CREATED_TODO } from "./type";
 
-export const CreateEmptyTodo = (status) => ({ type: CREATE_EMPTY_TOKEN, status });
+export const CreateEmptyTodo = (heading) => ({ type: CREATE_EMPTY_TOKEN, heading });
 
-export const RemoveEmptyTodo = (status, id) => ({ type: REMOVE_EMPTY_TODO_CARD, status, id });
+export const RemoveEmptyTodo = (heading, id) => ({ type: REMOVE_EMPTY_TODO_CARD, heading, id });
 
 export const CreateTodo = (title, desc, status) => async (dispatch, getState) => {
 	const { _id } = getState().auth_store.authCredentials;
@@ -17,7 +17,7 @@ export const CreateTodo = (title, desc, status) => async (dispatch, getState) =>
 		const data = await res.json();
 
 		if (data.data) {
-			dispatch({ type: SET_CREATED_TODO, todo: data.data });
+			dispatch({ type: SET_CREATED_TODO, status, todo: data.data });
 		}
 
 		return false;
@@ -38,4 +38,14 @@ export const GetAllTodo = () => async (dispatch, getState) => {
 	} catch (err) {
 		console.log("error found in getting all todos", err);
 	}
+};
+
+export const MoveSelectedTodoCard = (dragId, from, to) => async (dispatch) => {
+	dispatch({ type: MOVE_SELECTED_TODO_CARD, dragId, from, to });
+
+	await fetch("/home/update-todo", {
+		method: "PATCH",
+		headers: { "Content-Type": "application/json" },
+		body: JSON.stringify({ todoId: dragId, data: { status: to.droppableId } }),
+	});
 };

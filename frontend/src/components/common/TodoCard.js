@@ -1,14 +1,14 @@
 import React from "react";
 
-const TodoCard = ({ title, description }) => {
+const TodoCard = ({ id, title, description, status }) => {
 	return (
-		<div className="todo-card">
+		<>
 			<h4 className="card-title">{title}</h4>
 			<p className="card-desc">{description}</p>
 			<div className="card-created-by">
-				<h6>sumit</h6>
+				<h1>By sumit</h1>
 			</div>
-		</div>
+		</>
 	);
 };
 

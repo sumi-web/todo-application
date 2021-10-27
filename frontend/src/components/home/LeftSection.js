@@ -41,7 +41,7 @@ const LeftSection = () => {
 					</NavLink>
 					<div>
 						<div className="nav-link nav-logout" onClick={logout}>
-							<i class="bi bi-arrow-bar-right"></i>
+							<i className="bi bi-arrow-bar-right"></i>
 							<span>Logout</span>
 						</div>
 					</div>

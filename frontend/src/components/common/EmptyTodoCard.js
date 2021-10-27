@@ -3,12 +3,15 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { RemoveEmptyTodo, CreateTodo } from "../../action/action-todo";
 
+import Loader from "./Loader";
+
 const EmptyTodoCard = ({ heading, id }) => {
 	const dispatch = useDispatch();
 
 	const [cardValues, setCardValues] = useState({
 		title: "",
 		desc: "",
+		isLoading: false,
 	});
 
 	const changeTitle = ({ target: { value } }) => {
@@ -20,23 +23,35 @@ const EmptyTodoCard = ({ heading, id }) => {
 	};
 
 	const removeTodo = () => {
-		dispatch(RemoveEmptyTodo(heading, id));
+		const status = getTodoStatus(heading);
+
+		dispatch(RemoveEmptyTodo(status, id));
 	};
 
-	const saveTodo = () => {
+	const saveTodo = async () => {
 		if (!cardValues.title.trim() || !cardValues.desc.trim()) return;
 
+		const status = getTodoStatus(heading);
+
+		setCardValues({ ...cardValues, isLoading: true });
+
+		await dispatch(CreateTodo(cardValues.title, cardValues.desc, status));
+
+		setCardValues({ ...cardValues, isLoading: false });
+	};
+
+	const getTodoStatus = (listTitle) => {
 		let status = "";
 
-		if (heading === "To do") {
+		if (listTitle === "To Do") {
 			status = "todo";
-		} else if (heading === "In Progress") {
+		} else if (listTitle === "In Progress") {
 			status = "progress";
-		} else if (heading === "Completed") {
+		} else if (listTitle === "Completed") {
 			status = "completed";
 		}
 
-		dispatch(CreateTodo(cardValues.title, cardValues.desc, status));
+		return status;
 	};
 
 	return (
@@ -48,8 +63,8 @@ const EmptyTodoCard = ({ heading, id }) => {
 				{cardValues.desc}
 			</textarea>
 			<div className="btn-group">
-				<button className="save-btn" disabled={!cardValues.title.trim() || !cardValues.desc.trim()} onClick={saveTodo}>
-					Save
+				<button className="save-btn" disabled={!cardValues.title.trim() || !cardValues.desc.trim() || cardValues.isLoading} onClick={saveTodo}>
+					{cardValues.isLoading ? <Loader /> : "Save"}
 				</button>
 				<button className="cancel-btn" onClick={removeTodo}>
 					Cancel

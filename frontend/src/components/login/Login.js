@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
+import Loader from "../common/Loader";
 import Checkbox from "../common/Checkbox";
+import FormHead from "../common/FormHead";
 import Input from "../../components/common/Input";
 
 import { LoginUser } from "../../action/action-auth";
-import FormHead from "../common/FormHead";
 
 const Login = () => {
 	const history = useHistory();
@@ -24,7 +25,15 @@ const Login = () => {
 
 	const [inputError, setInputError] = useState({});
 
-	const [isChecked, setIsChecked] = useState(false);
+	const [rememberMe, setRememberMe] = useState(false);
+
+	useEffect(() => {
+		const rememberedUser = localStorage.getItem("rememberMe") === "true";
+		if (rememberedUser) {
+			setInputValues({ ...inputValues, email: localStorage.getItem("email") || "", password: localStorage.getItem("password") || "" });
+			setRememberMe(rememberedUser);
+		}
+	}, []);
 
 	const changeInputValues = ({ target: { name, value } }) => {
 		const valuesObj = { ...inputValues, [name]: value };
@@ -101,6 +110,15 @@ const Login = () => {
 			setInputValues({ ...inputValues, isLoading: false });
 
 			if (data.isLoggedIn) {
+				// save the user data in localStorage if user clicked on remember me
+				if (rememberMe) {
+					localStorage.setItem("rememberMe", rememberMe);
+					localStorage.setItem("email", inputValues.email);
+					localStorage.setItem("password", inputValues.password);
+				} else {
+					localStorage.clear();
+				}
+
 				// navigate to home
 				history.push("/home/projects");
 			} else {
@@ -147,21 +165,15 @@ const Login = () => {
 						onKeyUp={handleEnterKey}
 					/>
 					<span className={!!inputValues.error ? "visible" : "hidden"}>
-						<i class="bi bi-exclamation-circle"></i>
+						<i className="bi bi-exclamation-circle"></i>
 						{inputValues.error}
 					</span>
 				</div>
 				<button disabled={inputValues.isLoading} type="button" onClick={userLogin}>
-					{inputValues.isLoading ? (
-						<div class="spinner-border text-light spinner-border-sm" role="status">
-							<span class="visually-hidden">Loading...</span>
-						</div>
-					) : (
-						"Log In"
-					)}
+					{inputValues.isLoading ? <Loader /> : "Log In"}
 				</button>
 
-				<Checkbox isChecked={isChecked} changeCheck={() => setIsChecked((prev) => !prev)} />
+				<Checkbox isChecked={rememberMe} changeCheck={() => setRememberMe((prev) => !prev)} />
 			</div>
 		</div>
 	);

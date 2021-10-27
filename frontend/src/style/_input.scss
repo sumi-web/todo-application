@@ -13,11 +13,18 @@
 		width: 100%;
 		height: 100%;
 		padding: 5px;
+		font-size: 14px;
+		font-family: verdana;
+	}
+
+	input[type="password"] {
+		font-family: Verdana;
+		font-size: 14px;
 	}
 
 	i {
 		position: absolute;
-		top: 12%;
+		top: 25%;
 		right: 6%;
 		color: $color-medium-gray;
 		cursor: pointer;

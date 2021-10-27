@@ -1,20 +1,18 @@
 import React, { useState } from "react";
+
 import { useDispatch } from "react-redux";
-
-import Checkbox from "../common/Checkbox";
-import Input from "../common/Input";
-
 import { useHistory } from "react-router-dom";
 
-import { SignUpUser } from "../../action/action-auth";
+import Input from "../common/Input";
+import Loader from "../common/Loader";
 import FormHead from "../common/FormHead";
+
+import { SignUpUser } from "../../action/action-auth";
 
 const SignUp = () => {
 	const history = useHistory();
 
 	const dispatch = useDispatch();
-
-	const [isChecked, setIsChecked] = useState(false);
 
 	const [inputValues, setInputValues] = useState({
 		fullName: "",
@@ -129,8 +127,8 @@ const SignUp = () => {
 						name="fullName"
 						type="text"
 						placeholder="FullName"
-						error={!!inputError.name}
-						value={inputValues.name}
+						error={!!inputError.fullName}
+						value={inputValues.fullName}
 						onFocus={deleteError}
 						onChange={changeInputValues}
 					/>
@@ -162,16 +160,8 @@ const SignUp = () => {
 					</span>
 				</div>
 				<button disabled={inputValues.isLoading} type="button" onClick={userSignUp}>
-					{inputValues.isLoading ? (
-						<div class="spinner-border text-light spinner-border-sm" role="status">
-							<span class="visually-hidden">Loading...</span>
-						</div>
-					) : (
-						"Sign Up"
-					)}
+					{inputValues.isLoading ? <Loader /> : "Sign Up"}
 				</button>
-
-				<Checkbox isChecked={isChecked} changeCheck={() => setIsChecked((prev) => !prev)} />
 			</div>
 		</div>
 	);

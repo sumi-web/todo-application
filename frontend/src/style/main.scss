@@ -1,6 +1,5 @@
 @import "_variables.scss";
 @import "_mixins.scss";
-@import "_buttons.scss";
 @import "_login.scss";
 @import "_home.scss";
 @import "_login.scss";
@@ -40,6 +39,7 @@ h5,
 h6,
 ul {
 	margin: 0;
+	font-weight: 500;
 	font-family: "Montserrat", sans-serif;
 }
 
@@ -76,6 +76,28 @@ textarea {
 button {
 	border: none;
 	outline: none;
+}
+
+.loader {
+	display: inline-block;
+	width: 1em;
+	height: 1em;
+	color: inherit;
+	vertical-align: middle;
+	pointer-events: none;
+	border: 0.2em solid $white;
+	border-bottom-color: transparent;
+	border-radius: 50%;
+	animation: 1s loader linear infinite;
+}
+
+@keyframes loader {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
 }
 
 #todo-app-screen {

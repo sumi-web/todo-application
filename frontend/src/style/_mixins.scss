@@ -1,41 +1,35 @@
-@mixin applyFlex($direction, $justifyContent, $alignItems) {
+@mixin applyFlex($justifyContent, $alignItems) {
 	display: flex;
-	flex-direction: $direction;
 	align-items: $alignItems;
 	justify-content: $justifyContent;
 }
 
-@mixin button-variant($fontSize, $color, $background, $border) {
+@mixin buttonVariant($fontSize, $color, $background, $border) {
 	/*button mixin start*/
 	color: $color;
 	background-color: $background;
-	border-color: $border;
-	outline: none;
 	font-size: $fontSize;
+	border-radius: $border;
 	&:focus,
 	&.focus {
 		color: $color;
 		background-color: $background;
-		border-color: $border;
 	}
 	&:hover {
 		color: $color;
 		background-color: darken($background, 10%);
-		border-color: darken($border, 12%);
 	}
 	&:active,
 	&.active,
 	.open > &.dropdown-toggle {
 		color: $color;
 		background-color: darken($background, 10%);
-		border-color: darken($border, 12%);
 
 		&:hover,
 		&:focus,
 		&.focus {
 			color: $color;
 			background-color: darken($background, 15%);
-			border-color: darken($border, 25%);
 		}
 	}
 	&:active,
@@ -51,7 +45,6 @@
 		&:focus,
 		&.focus {
 			background-color: $background;
-			border-color: $border;
 		}
 	}
 

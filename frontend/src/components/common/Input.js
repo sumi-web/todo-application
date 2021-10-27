@@ -8,7 +8,7 @@ const Input = ({ name, type, placeholder, passwordVisibility, togglePasswordVisi
 				(passwordVisibility ? (
 					<i className="bi bi-eye-fill" onClick={togglePasswordVisibility}></i>
 				) : (
-					<i class="bi bi-eye-slash-fill" onClick={togglePasswordVisibility}></i>
+					<i className="bi bi-eye-slash-fill" onClick={togglePasswordVisibility}></i>
 				))}
 		</div>
 	);

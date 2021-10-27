@@ -20,11 +20,15 @@
 			.nav-link-box {
 				display: block;
 				margin-bottom: 40px;
+				&.top {
+					margin-bottom: 30px;
+				}
 			}
 		}
 
 		.nav-title {
 			font-size: 1.8rem;
+			margin-bottom: 2.5rem;
 		}
 
 		.nav-link {
@@ -34,7 +38,7 @@
 			align-items: flex-end;
 			gap: 23px;
 			font-size: 1.1rem;
-			margin-bottom: 15px;
+			margin-bottom: 40px;
 			&:hover {
 				opacity: 0.8;
 			}
@@ -48,9 +52,10 @@
 
 		.nav-active .nav-link::after {
 			content: "";
-			cursor: auto;
-			border: 2px solid $color-primary;
+			cursor: pointer;
+			background-color: $color-primary;
 			height: 35px;
+			width: 3px;
 			position: absolute;
 			right: -76px;
 			border-radius: 50px;
@@ -71,7 +76,6 @@
 		width: 100%;
 		display: flex;
 		flex-direction: column;
-		height: 20vh;
 
 		.top {
 			display: flex;
@@ -132,12 +136,11 @@
 
 		.bottom {
 			.projects-filter-bar {
-				display: flex;
-				align-items: center;
-				justify-content: space-between;
-				margin: 2rem 0 1rem 0;
+				@include applyFlex(space-between, center);
+				margin: 1.4rem 0 0.5rem 0;
 				h2 {
 					font-size: 1.3rem;
+					font-weight: 600;
 				}
 				.filter-container {
 					display: flex;
@@ -148,6 +151,7 @@
 					}
 					h3 {
 						font-size: 1.2rem;
+						font-weight: 500;
 						margin-left: 5px;
 					}
 				}
@@ -158,13 +162,18 @@
 	.todo-container-area {
 		display: flex;
 		justify-content: space-evenly;
-		min-height: 550px;
 		.todo-container {
 			margin: 0 10px;
 			padding: 1.5rem 2rem;
 			border-radius: 10px;
 			width: 100%;
 			background-color: $light-bg-green;
+			max-height: 530px;
+			overflow-y: auto;
+
+			&.dragover {
+				background-color: darken($light-bg-green, 10%);
+			}
 			.todo-heading {
 				display: flex;
 				justify-content: space-between;
@@ -172,15 +181,14 @@
 				margin-bottom: 1rem;
 				h5 {
 					font-size: 0.95rem;
+					font-weight: 600;
 					color: $black-secondary;
 				}
 				span {
-					display: flex;
-					align-items: center;
-					justify-content: center;
+					@include applyFlex(center, center);
 					background-color: $todo-color;
-					width: 20px;
-					height: 20px;
+					width: 30px;
+					height: 30px;
 					border-radius: 5px;
 					color: $color-primary;
 				}
@@ -188,14 +196,9 @@
 
 			.add-todo-btn {
 				width: 100%;
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				background-color: $todo-color;
-				color: $color-primary;
-				padding: 0.4rem 0;
-				border-radius: 10px;
-				font-size: 1.2rem;
+				@include applyFlex(center, center);
+				@include buttonVariant(1.2rem, $color-primary, $todo-color, 10px);
+				padding: 0.2rem 0;
 			}
 
 			.todo-Card {
@@ -210,29 +213,56 @@
 		cursor: pointer;
 		width: 100%;
 		background-color: $white;
-		border: 1px solid $color-light-gray;
 		border-radius: 10px;
 		margin: 0.8rem 0 1rem 0;
 		padding: 1rem 1.2rem;
-		box-shadow: 0 2px 10px rgba(0, 0, 0, 0.01);
+		box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+		&.moving {
+			background-color: $light-bg-green;
+		}
+
+		& > .card-title {
+			font-size: 1.05rem;
+			margin-bottom: 0.5rem;
+		}
+		& > .card-desc {
+			font-size: 0.95rem;
+			margin-bottom: 0.5rem;
+			color: $color-medium-gray;
+		}
+
+		& > .card-created-by {
+			font-size: 0.4rem;
+		}
+
 		&.empty-card .btn-group {
 			width: 100%;
 			display: flex;
 			align-items: center;
 			justify-content: space-evenly;
+			input {
+				font-size: 0.9rem;
+			}
+			textarea {
+				font-size: 0.1rem;
+			}
 
 			& > button {
 				padding: 0.2rem 1.5rem;
 				border-radius: 5px;
+				font-size: 0.98rem;
 				&.disabled,
 				&[disabled] {
-					opacity: 0.7;
-					cursor: default;
+					opacity: 0.6;
+					cursor: pointer;
 				}
 
 				&.save-btn {
 					background-color: $color-primary;
 					color: $white;
+					&:active {
+						background-color: darken($color-primary, 10%);
+					}
 				}
 
 				&.cancel-btn {
@@ -244,10 +274,12 @@
 
 		input {
 			width: 100%;
+			font-size: 0.95rem;
 		}
 
 		textarea {
 			width: 100%;
+			font-size: 0.85rem;
 		}
 	}
 }

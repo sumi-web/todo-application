@@ -24,5 +24,20 @@ export const GetAllTodo = async (req, res) => {
 		}
 	} catch (err) {
 		console.log("err in getting all todos in server", err);
+		res.status(400).send(err);
+	}
+};
+
+export const UpdateTodo = async (req, res) => {
+	const { todoId, data } = req.body;
+
+	try {
+		const updateTodo = await Todo.findByIdAndUpdate(todoId, data, { new: true });
+
+		res.status(200).send("success");
+		console.log("check updated todo", updateTodo);
+	} catch (err) {
+		console.log("error in updating todo in server", err);
+		res.status(400).send(err);
 	}
 };

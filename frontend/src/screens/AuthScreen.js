@@ -11,14 +11,10 @@ const AuthScreen = () => {
 	return (
 		<>
 			<div className="auth-screen">
-				<div className="container">
-					<div className="row">
-						<div className="col-md-6">
-							<img src={TodoImage} alt="todo" />
-						</div>
-						<div className="col-md-6">{isSignUpFormVisible ? <SignUp /> : <Login />}</div>
-					</div>
+				<div className="login-image">
+					<img src={TodoImage} alt="todo" />
 				</div>
+				<div className="auth-form">{isSignUpFormVisible ? <SignUp /> : <Login />}</div>
 			</div>
 		</>
 	);
