@@ -67,7 +67,7 @@ const Setting = () => {
 	return (
 		<div className="setting-screen">
 			<div className="user-image">
-				<img src={userImage} alt="user" />
+				<img src={userImage} alt="user-defined" />
 			</div>
 
 			<div className="user-info-box">

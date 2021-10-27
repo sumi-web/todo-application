@@ -16,7 +16,7 @@ mongoose
 	.connect(process.env.SERVER_DB_URL)
 	.then(() => {
 		app.listen(3001, (result) => {
-			console.log("mongoDb connect and server has been started at 3001");
+			console.log("mongoDb connected and server has been started at 3001");
 		});
 	})
 	.catch((err) => console.log("error in connecting in db"));
