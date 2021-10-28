@@ -5,6 +5,7 @@ import { useHistory } from "react-router-dom";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { VerifyUserToken } from "./action/action-auth";
 import FullScreenLoader from "./components/common/FullScreenLoader";
+import Setting from "./components/home/setting/Setting";
 import AuthScreen from "./screens/AuthScreen";
 import HomeScreen from "./screens/HomeScreen";
 
@@ -34,6 +35,7 @@ const Routes = () => {
 				<Switch>
 					<Route path="/auth/login-signup" component={AuthScreen} />
 					<Route path="/home/projects" component={HomeScreen} />
+					<Route path="/home/settings" component={Setting} />
 					<Route exact path="/">
 						{isLoggedIn ? <Redirect to="/home" /> : <Redirect to="/auth/login-signup" />}
 					</Route>

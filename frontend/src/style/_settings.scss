@@ -2,6 +2,7 @@
 	@include applyFlex(flex-start, center);
 	flex-direction: column;
 	padding: 4rem 0;
+	flex: 0.85;
 
 	.user-image {
 		margin-bottom: 3rem;
