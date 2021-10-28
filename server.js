@@ -11,11 +11,13 @@ const app = express();
 // config .env file
 dotenv.config();
 
+const PORT = process.env.PORT || 3001;
+
 //connect to mongoDB
 mongoose
 	.connect(process.env.SERVER_DB_URL)
 	.then(() => {
-		app.listen(3001, (result) => {
+		app.listen(PORT, (result) => {
 			console.log("mongoDb connected and server has been started at 3001");
 		});
 	})
@@ -25,11 +27,16 @@ mongoose
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+app.use(express.static("frontend/build"));
 
 // routing middleware
 app.use("/auth", authRouter);
 app.use("/home", todoRouter);
 //middleware for handling 404 page
+
+app.get("*", (req, res) => {
+	res.redirect("/");
+});
 
 app.use((req, res) => {
 	res.status(404).send("404 page found");
