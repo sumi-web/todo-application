@@ -6,10 +6,10 @@ import cookieParser from "cookie-parser";
 import authRouter from "./src/routers/auth.js";
 import todoRouter from "./src/routers/todo.js";
 
-// init app
-const app = express();
 // config .env file
 dotenv.config();
+// init app
+const app = express();
 
 const PORT = process.env.PORT || 3001;
 
