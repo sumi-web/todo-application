@@ -29,7 +29,7 @@
 					&::before {
 						content: "";
 						position: absolute;
-						bottom: 0;
+						bottom: -4px;
 						left: 0;
 						width: 15px;
 						height: 3px;
@@ -51,10 +51,10 @@
 				color: #333;
 			}
 			p {
-				color: $color-light-gray;
-				letter-spacing: 1px;
+				color: $color-medium-gray;
 				word-spacing: 0;
 				font-size: 0.8rem;
+				margin-bottom: 1.2rem;
 			}
 
 			.form-container {
@@ -76,6 +76,7 @@
 			@include buttonVariant(15px, $white, $color-primary, 6px);
 			margin: 10px 0 10px 0;
 			width: 100%;
+			font-size: 1rem;
 			padding: 0.3rem 0.8rem;
 		}
 	}
