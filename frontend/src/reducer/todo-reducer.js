@@ -2,6 +2,7 @@ import {
 	CREATE_EMPTY_TOKEN,
 	DELETE_TODO,
 	MOVE_SELECTED_TODO_CARD,
+	REMOVE_EDIT_MODAL_DATA,
 	REMOVE_EMPTY_TODO_CARD,
 	SET_ALL_TODO,
 	SET_CREATED_TODO,
@@ -90,10 +91,13 @@ export function todoReducer(state = INITIAL_STATE, action) {
 	}
 
 	if (action.type === UPDATE_TODO) {
-		newState[action.data.status].list = state[action.data.status].list.map((todo) =>
-			todo._id === action.data._id ? { ...todo, ...action.data } : { ...todo }
-		);
+		newState[action.data.status].list = state[action.data.status].list.map((todo) => (todo._id === action.data._id ? { ...todo, ...action.data } : { ...todo }));
 
+		newState.editTodo = {};
+		return newState;
+	}
+
+	if (action.type === REMOVE_EDIT_MODAL_DATA) {
 		newState.editTodo = {};
 		return newState;
 	}

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 
@@ -15,6 +15,8 @@ const Setting = () => {
 		emailField: false,
 	});
 
+	const userData = useSelector((state) => state.auth_store.authCredentials);
+
 	const [fullName, setFullName] = useState("");
 
 	const [email, setEmail] = useState("");
@@ -23,16 +25,23 @@ const Setting = () => {
 
 	const dispatch = useDispatch();
 
-	const userData = useSelector((state) => state.auth_store.authCredentials);
+	useEffect(() => {
+		setEmail(userData.email);
+		setFullName(userData.name);
+	}, [userData]);
 
 	const editName = () => {
-		setStoredValuesInState();
+		if (fullName.trim() !== userData.name) {
+			setFullName(userData.name);
+		}
 
 		setFieldVisibility({ ...fieldVisibility, nameField: !fieldVisibility.nameField });
 	};
 
 	const editEmail = () => {
-		setStoredValuesInState();
+		if (email.trim() !== userData.email) {
+			setEmail(userData.email);
+		}
 
 		setFieldVisibility({ ...fieldVisibility, emailField: !fieldVisibility.emailField });
 	};
@@ -84,10 +93,7 @@ const Setting = () => {
 					{fieldVisibility.emailField ? <Input placeholder="Email" value={email} onChange={changeEmail} /> : <h4>{userData.email}</h4>}
 				</div>
 			</div>
-			<button
-				disabled={isLoading || (!fullName && !email) || (userData.name === fullName.trim() && userData.email === email.trim())}
-				onClick={saveEditedUserDetails}
-			>
+			<button disabled={isLoading || (!fullName && !email) || (userData.name === fullName.trim() && userData.email === email.trim())} onClick={saveEditedUserDetails}>
 				{isLoading ? <Loader /> : "Save"}
 			</button>
 		</div>
