@@ -109,7 +109,7 @@ const Login = () => {
 			setInputValues({ ...inputValues, isLoading: false });
 
 			if (data.isLoggedIn) {
-				// save the user data in localStorage if user clicked on remember me
+				// save the user data in localStorage if user clicked on remember me checkbox
 				if (rememberMe) {
 					localStorage.setItem("rememberMe", rememberMe);
 					localStorage.setItem("email", inputValues.email);
@@ -141,7 +141,15 @@ const Login = () => {
 				<p>We need your email and password</p>
 
 				<div className="form-container">
-					<Input name="email" type="text" placeholder="Email" error={!!inputError.email} value={inputValues.email} onFocus={deleteError} onChange={changeInputValues} />
+					<Input
+						name="email"
+						type="text"
+						placeholder="Email"
+						error={!!inputError.email}
+						value={inputValues.email}
+						onFocus={deleteError}
+						onChange={changeInputValues}
+					/>
 
 					<Input
 						name="password"

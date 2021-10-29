@@ -31,16 +31,16 @@ app.use(cookieParser());
 // for production build
 if (process.env.NODE_ENV === "Production") {
 	app.use(express.static("frontend/build"));
-
-	app.get("*", (req, res) => {
-		res.redirect("/");
-	});
 }
 
 // routing middleware
 app.use("/auth", authRouter);
 app.use("/home", todoRouter);
 //middleware for handling 404 page
+
+app.get("*", (req, res) => {
+	res.redirect("/");
+});
 
 app.use((req, res) => {
 	res.status(404).send("404 page found");

@@ -14,7 +14,7 @@ const AuthScreen = () => {
 				<div className="login-image">
 					<img src={TodoImage} alt="todo" />
 				</div>
-				<div className="auth-form">{isSignUpFormVisible ? <SignUp /> : <Login />}</div>
+				{isSignUpFormVisible ? <SignUp /> : <Login />}
 			</div>
 		</>
 	);

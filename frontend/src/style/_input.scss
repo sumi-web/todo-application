@@ -3,8 +3,8 @@
 	height: 40px;
 	padding: 0 6px;
 	width: 100%;
-	margin: 0 0 14px 0;
-	border: 1px solid #cfd6dc;
+	margin: 0 0 1.1rem 0;
+	border: 1px solid #cbdbea;
 	border-radius: 5px;
 	&.error {
 		border-color: $color-danger;
@@ -14,23 +14,31 @@
 		height: 100%;
 		padding: 5px;
 		font-size: 14px;
-		font-family: verdana;
-		color: $color-dark-gray;
+		// font-family: verdana;
+		font-family: "Poppins", sans-serif;
+		color: #1a3b58;
 		&::placeholder {
-			color: $color-medium-gray;
+			color: #7e93a8;
+			font-weight: 300;
+			font-family: "Poppins", sans-serif;
 		}
 	}
 
 	input[type="password"] {
-		font-family: Verdana;
+		// font-family: Verdana;
+		letter-spacing: 1px;
+		font-family: "Poppins", sans-serif;
 		font-size: 14px;
+		&::placeholder {
+			letter-spacing: 0;
+		}
 	}
 
 	i {
 		position: absolute;
 		top: 25%;
 		right: 6%;
-		color: $color-medium-gray;
+		color: #b7c0c9;
 		cursor: pointer;
 		font-size: 1.1rem;
 	}

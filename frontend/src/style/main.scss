@@ -7,11 +7,13 @@
 @import "_settings.scss";
 @import "_screen-loader.scss";
 
-@import url("https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700;800;900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Berkshire+Swash&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Merienda:wght@400;700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap");
+// @import url("https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700;800;900&display=swap");
+// @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap");
+// @import url("https://fonts.googleapis.com/css2?family=Berkshire+Swash&display=swap");
+// @import url("https://fonts.googleapis.com/css2?family=Merienda:wght@400;700&display=swap");
+// @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
 
 * {
 	margin: 0;
@@ -27,15 +29,7 @@ small {
 	font-family: "Jost", sans-serif;
 }
 
-code {
-	font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
-}
-
-h1 {
-	margin: 0;
-	font-family: "Montserrat", sans-serif;
-}
-
+h1,
 h2,
 h3,
 h4,
@@ -43,18 +37,13 @@ h5,
 h6,
 ul {
 	margin: 0;
-	font-weight: 500;
-	font-family: "Roboto", sans-serif;
+	font-family: "Poppins", sans-serif;
 }
 
 p,
 span {
-	font-family: "Roboto", sans-serif;
-}
-
-ul,
-li {
-	list-style-type: none;
+	margin: 0;
+	font-family: "Poppins", sans-serif;
 }
 
 a {

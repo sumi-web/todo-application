@@ -10,20 +10,26 @@
 		}
 	}
 	.auth-form-box {
-		border: 1px solid $color-light-gray;
+		@include applyFlex(flex-start, stretch);
+		flex-direction: column;
+		border: 2px solid rgba(26, 59, 88, 0.24);
 		border-radius: 40px;
-		padding: 2rem 2.5rem;
-		min-width: 400px;
-		height: 400px;
+		padding: 3.5rem 3rem 3.5rem 3rem;
+		width: 400px;
+		min-height: 450px;
 		.auth-form-head {
-			@include applyFlex(flex-start, center);
+			@include applyFlex(flex-start, flex-start);
 			span {
 				position: relative;
-				color: $color-light-gray;
+				color: #1a3b5854;
 				font-weight: 500;
 				font-size: 1.2rem;
 				margin: 0 10px;
 				cursor: pointer;
+				margin-bottom: 0.5rem;
+				&:hover {
+					color: lighten(#1a3b5854, 40%);
+				}
 				&.active {
 					color: $black-secondary;
 					&::before {
@@ -31,29 +37,32 @@
 						position: absolute;
 						bottom: -4px;
 						left: 0;
-						width: 15px;
+						width: 20px;
 						height: 3px;
-						background-color: #274662;
+						background-color: #1a3b58;
+						border-radius: 50px;
 					}
 				}
 			}
 		}
 		.form-bar {
-			background-color: $color-light-gray;
-			height: 1px;
-			width: 180px;
-			margin: 1.5rem auto;
+			background-color: #4091df1f;
+			height: 2px;
+			width: 190px;
+			margin: 1.4rem auto;
 		}
 		.form-inner-box {
 			padding: 0 1.5rem;
 			h6 {
 				font-size: 1.2rem;
-				color: #333;
+				color: #1a3b58;
+				font-weight: 500;
 			}
 			p {
-				color: $color-medium-gray;
+				color: #999999;
 				word-spacing: 0;
 				font-size: 0.8rem;
+				font-weight: 300;
 				margin-bottom: 1.2rem;
 			}
 
@@ -74,10 +83,11 @@
 		}
 		button {
 			@include buttonVariant(15px, $white, $color-primary, 6px);
-			margin: 10px 0 10px 0;
+			margin: 10px 0 20px 0;
 			width: 100%;
 			font-size: 1rem;
-			padding: 0.3rem 0.8rem;
+			padding: 0.4rem 0.8rem;
+			font-weight: 600;
 		}
 	}
 }
@@ -87,7 +97,7 @@
 	align-items: center;
 
 	small.remember {
-		font-size: 0.85rem;
+		font-size: 0.75rem;
 		color: $black-secondary;
 	}
 	.checkbox {

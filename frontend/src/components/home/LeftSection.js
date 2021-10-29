@@ -25,7 +25,7 @@ const LeftSection = () => {
 			<div className="sidebar-container">
 				<div className="sidebar-navigation-container">
 					<div className="nav-link-box top">
-						<p className="nav-title">.taskEZ</p>
+						<p className="nav-title">.taskez</p>
 						{leftTopNav.map((data, i) => (
 							<NavLink key={i} to={"/home" + data.url} activeClassName="nav-active">
 								<div className="nav-link">

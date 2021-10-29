@@ -7,8 +7,11 @@ export const tokenVerify = (req, res, next) => {
 		res.status(401).send("Access Denied");
 	}
 
+	console.log("cookie ver", cookie);
+
 	try {
 		const verified = jwt.verify(cookie.jwt, process.env.JWT_TOKEN_SECRET);
+		console.log("token ver", verified);
 		// saving user here to get user in any private route
 		req.user = verified;
 		next();
