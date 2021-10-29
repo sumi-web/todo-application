@@ -18,7 +18,7 @@ mongoose
 	.connect(process.env.SERVER_DB_URL)
 	.then(() => {
 		app.listen(PORT, (result) => {
-			console.log("mongoDb connected and server has been started at 3001");
+			console.log(`mongoDb connected and server has been started at ${PORT}`);
 		});
 	})
 	.catch((err) => console.log("error in connecting in db"));
@@ -27,16 +27,20 @@ mongoose
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(express.static("frontend/build"));
+
+// for production build
+if (process.env.NODE_ENV === "Production") {
+	app.use(express.static("frontend/build"));
+
+	app.get("*", (req, res) => {
+		res.redirect("/");
+	});
+}
 
 // routing middleware
 app.use("/auth", authRouter);
 app.use("/home", todoRouter);
 //middleware for handling 404 page
-
-app.get("*", (req, res) => {
-	res.redirect("/");
-});
 
 app.use((req, res) => {
 	res.status(404).send("404 page found");

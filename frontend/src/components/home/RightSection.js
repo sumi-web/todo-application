@@ -1,6 +1,6 @@
 import React from "react";
 
-import { useRouteMatch, Redirect, Switch, Route } from "react-router-dom";
+import { useRouteMatch } from "react-router-dom";
 
 import HeaderBar from "./HeaderBar";
 import Projects from "./Projects";

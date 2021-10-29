@@ -82,7 +82,6 @@ const Login = () => {
 			}
 
 			//validation password
-
 			if (inputValues.password.trim().length === 0) {
 				error.password = "password can not be empty";
 			} else if (inputValues.password.trim().length <= 5) {
@@ -142,15 +141,7 @@ const Login = () => {
 				<p>We need your email and password</p>
 
 				<div className="form-container">
-					<Input
-						name="email"
-						type="text"
-						placeholder="Email"
-						error={!!inputError.email}
-						value={inputValues.email}
-						onFocus={deleteError}
-						onChange={changeInputValues}
-					/>
+					<Input name="email" type="text" placeholder="Email" error={!!inputError.email} value={inputValues.email} onFocus={deleteError} onChange={changeInputValues} />
 
 					<Input
 						name="password"

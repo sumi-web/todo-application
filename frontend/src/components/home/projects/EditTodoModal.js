@@ -6,7 +6,7 @@ import Input from "../../common/Input";
 import Modal from "../../common/Modal";
 import Loader from "../../common/Loader";
 
-import { SaveEditedTodoData } from "../../../action/action-todo";
+import { RemoveEditModalData, SaveEditedTodoData } from "../../../action/action-todo";
 
 const EditTodoModal = ({ isOpen, isLocked, onClose, action }) => {
 	const dispatch = useDispatch();
@@ -31,6 +31,11 @@ const EditTodoModal = ({ isOpen, isLocked, onClose, action }) => {
 		setInputValues({ ...inputValues, desc: value });
 	};
 
+	const closeModal = () => {
+		dispatch(RemoveEditModalData());
+		onClose();
+	};
+
 	const saveEditedTodoDetails = async () => {
 		setInputValues({ ...inputValues, isLoading: true });
 		await dispatch(SaveEditedTodoData(todoData._id, inputValues.title, inputValues.desc));
@@ -52,13 +57,11 @@ const EditTodoModal = ({ isOpen, isLocked, onClose, action }) => {
 				</div>
 				<div className="edit-desc">
 					<h5>Description</h5>
-					<textarea rows={3} value={inputValues.desc} onChange={changeDesc} />
+					<textarea rows={2} value={inputValues.desc} onChange={changeDesc} />
 				</div>
 
 				<button
-					disabled={
-						inputValues.isLoading || !inputValues.title || (inputValues.title === todoData.title && inputValues.desc === todoData.desc) || !inputValues.desc
-					}
+					disabled={inputValues.isLoading || !inputValues.title || (inputValues.title === todoData.title && inputValues.desc === todoData.desc) || !inputValues.desc}
 					onClick={saveEditedTodoDetails}
 				>
 					{inputValues.isLoading ? <Loader /> : "Save"}

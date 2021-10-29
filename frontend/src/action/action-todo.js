@@ -1,13 +1,4 @@
-import {
-	CREATE_EMPTY_TOKEN,
-	DELETE_TODO,
-	MOVE_SELECTED_TODO_CARD,
-	REMOVE_EMPTY_TODO_CARD,
-	SET_ALL_TODO,
-	SET_CREATED_TODO,
-	SET_EDIT_TODO_DATA,
-	UPDATE_TODO,
-} from "./type";
+import { CREATE_EMPTY_TOKEN, DELETE_TODO, MOVE_SELECTED_TODO_CARD, REMOVE_EDIT_MODAL_DATA, REMOVE_EMPTY_TODO_CARD, SET_ALL_TODO, SET_CREATED_TODO, SET_EDIT_TODO_DATA, UPDATE_TODO } from "./type";
 
 export const CreateEmptyTodo = (heading) => ({ type: CREATE_EMPTY_TOKEN, heading });
 
@@ -102,3 +93,5 @@ export const SaveEditedTodoData = (todoId, title, desc) => async (dispatch) => {
 		console.log("err in editing todo details", err);
 	}
 };
+
+export const RemoveEditModalData = () => ({ type: REMOVE_EDIT_MODAL_DATA });
