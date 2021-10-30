@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 
-import userImage from "../../../assets/847969.png";
+import userImage from "../../../assets/image1.png";
 
 import Input from "../../common/Input";
 import Loader from "../../common/Loader";
@@ -52,16 +52,6 @@ const Setting = () => {
 
 	const changeEmail = ({ target: { value } }) => {
 		setEmail(value);
-	};
-
-	const setStoredValuesInState = () => {
-		if (fullName.trim() !== userData.name) {
-			setFullName(userData.name);
-		}
-
-		if (email.trim() !== userData.email) {
-			setEmail(userData.email);
-		}
 	};
 
 	const saveEditedUserDetails = async () => {
