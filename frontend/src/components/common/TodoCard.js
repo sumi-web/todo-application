@@ -48,6 +48,7 @@ const TodoCard = ({ userId, todoId, title, description, status, ...props }) => {
 					<img src={defaultImage} alt="user image" />
 					<i class="bi bi-chat-left"></i>
 				</div>
+				<i class="bi bi-x"></i>
 			</div>
 			<ConfirmModal isOpen={delState.isOpen} isLoading={delState.isLoading} title="Delete" onClose={() => setDelState({ ...delState, isOpen: false })} action={deleteCard} />
 			<EditTodoModal isOpen={editState.isOpen} isLocked={editState.isLocked} onClose={closeEditModal} />
