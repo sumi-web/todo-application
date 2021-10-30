@@ -45,12 +45,7 @@ const TodoContainer = ({ heading, todoData }) => {
 						) : (
 							<Draggable key={item._id} draggableId={item._id} index={i}>
 								{(provided, snapshot) => (
-									<div
-										className={`todo-card ${snapshot.isDragging ? "moving" : ""}`}
-										ref={provided.innerRef}
-										{...provided.draggableProps}
-										{...provided.dragHandleProps}
-									>
+									<div className={`todo-box ${snapshot.isDragging ? "moving" : ""}`} ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
 										<TodoCard todoId={item._id} userId={item.userId} title={item.title} description={item.desc} status={item.status} />
 									</div>
 								)}

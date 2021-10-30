@@ -2,13 +2,11 @@ import React from "react";
 
 import SearchBox from "../common/SearchBox";
 import AllImages from "../../assets/all-images.png";
-import UserImage from "../../assets/847969.png";
+import UserImage from "../../assets/image1.png";
 import { useSelector } from "react-redux";
 
 const HeaderBar = () => {
 	const userInfo = useSelector((state) => state.auth_store.authCredentials);
-
-	console.log("check usr", userInfo);
 
 	return (
 		<div className="top-header-bar">
@@ -16,12 +14,11 @@ const HeaderBar = () => {
 				<div className="search-box">
 					<SearchBox placeholder="Search.." />
 				</div>
-				<div className="user-info-images">
-					<img className="all-images" src={AllImages} alt="all-images" />
-					<div className="user-info">
-						<h1>Hi {userInfo.name}</h1>
-						<img src={UserImage} alt="user" />
-					</div>
+
+				<img className="all-images" src={AllImages} alt="all-images" />
+				<div className="user-info">
+					<h1>Hi {userInfo.name}</h1>
+					<img src={UserImage} alt="user" />
 				</div>
 			</div>
 

@@ -1,14 +1,14 @@
 .left-section {
-	flex: 0.15;
+	flex: 0.18;
 
 	.sidebar-container {
 		height: 100vh;
 		align-self: flex-start;
-		padding: 10px 75px 10px 50px;
+		padding: 25px 75px 50px 50px;
 		background-color: white;
 		position: sticky;
 		top: 0;
-		border-right: 2px solid #f1f1f1;
+		border-right: 2px solid #f0f0f0;
 		animation: slideFromLeft 0.2s ease-in-out;
 
 		.sidebar-navigation-container {
@@ -16,37 +16,38 @@
 			display: flex;
 			flex-direction: column;
 			justify-content: space-between;
+			height: 100%;
 
 			.nav-link-box {
 				display: block;
-				margin-bottom: 40px;
-				&.top {
-					margin-bottom: 30px;
-				}
 			}
 		}
 
 		.nav-title {
-			font-size: 1.8rem;
+			font-size: 1.5rem;
 			margin-bottom: 2.5rem;
+			color: #161616;
+			letter-spacing: 0.03em;
 		}
 
 		.nav-link {
-			color: #274662;
-			opacity: 0.6;
+			color: #9a9a9a;
+			opacity: 0.8;
 			display: flex;
 			align-items: flex-end;
 			gap: 23px;
 			font-size: 1.1rem;
 			margin-bottom: 40px;
+			font-weight: 400;
 			&:hover {
 				opacity: 0.8;
+				color: darken(#9a9a9a, 10%);
 			}
 		}
 
 		.nav-active .nav-link {
-			color: #274662;
-			font-weight: bold;
+			color: #212121;
+			font-weight: 500;
 			opacity: 1;
 		}
 
@@ -55,7 +56,7 @@
 			cursor: pointer;
 			background-color: $color-primary;
 			height: 35px;
-			width: 3px;
+			width: 5px;
 			position: absolute;
 			right: -76px;
 			border-radius: 50px;
@@ -70,69 +71,65 @@
 
 .right-section {
 	height: 100vh;
-	flex: 0.85;
+	flex: 0.82;
 	padding: 1rem 1.2rem;
 	//projects related styling
-
 	.top-header-bar {
 		width: 100%;
 		display: flex;
 		flex-direction: column;
-		margin-bottom: 0.5rem;
+		margin-bottom: 0.8rem;
 
 		.top {
-			display: flex;
+			@include applyFlex(space-between, center);
 			.search-box {
 				flex: 0.3;
 
 				.search-input-box {
 					display: flex;
 					align-items: center;
-					background-color: #f9f9f9;
 					height: 40px;
 					padding: 0.5rem 1rem;
-					border-radius: 20px;
+					min-width: 200px;
 				}
 				i {
-					font-size: 1rem;
+					font-size: 1.1rem;
 					display: inline;
 					margin-right: 10px;
+					color: #9a9a9a;
 				}
 				input {
 					width: 100%;
 					height: 20px;
-					font-size: 1.1rem;
+					font-size: 1.02rem;
 					background: transparent;
+					color: #1a3b58;
+					&::placeholder {
+						color: #9a9a9a;
+					}
 				}
 			}
 
-			.user-info-images {
-				display: flex;
-				flex: 0.7;
-				align-items: center;
-				justify-content: space-between;
-				padding: 0 1rem;
-				& > img {
-					height: 40px;
-					width: 200px;
-					object-fit: contain;
-				}
+			& > img {
+				height: 30px;
+				width: 180px;
+				object-fit: contain;
+			}
 
-				.user-info {
-					display: flex;
-					align-items: center;
-					h1 {
-						font-size: 1.4rem;
-						color: #274662;
-						font-weight: 500;
-						margin-right: 10px;
-					}
-					img {
-						height: 50px;
-						width: 50px;
-						border-radius: 50%;
-						margin-left: 10px;
-					}
+			.user-info {
+				@include applyFlex(center, center);
+				gap: 15px;
+				h1 {
+					font-size: 1.2rem;
+					color: #3a3a3a;
+					font-weight: normal;
+					margin-right: 10px;
+				}
+				img {
+					height: 45px;
+					width: 45px;
+					// border-radius: 50%;
+					margin-left: 10px;
 				}
 			}
 		}
@@ -142,12 +139,12 @@
 				@include applyFlex(space-between, center);
 				margin: 1.4rem 0 0.5rem 0;
 				h2 {
-					font-size: 1.3rem;
+					font-size: 1.4rem;
 					font-weight: 500;
 				}
 				.filter-container {
-					display: flex;
-					align-items: center;
+					@include applyFlex(center, center);
+					color: #3a3a3a;
 					i {
 						font-size: 1.2rem;
 						margin-right: 5px;
@@ -170,23 +167,24 @@
 			padding: 1.5rem 2rem;
 			border-radius: 10px;
 			width: 100%;
-			background-color: $light-bg-green;
-			min-height: 500px;
+			background-color: #f5f9f9;
+			min-height: 550px;
 			max-height: 530px;
 			overflow-y: auto;
 
 			&.dragover {
 				background-color: darken($light-bg-green, 10%);
 			}
+
 			.todo-heading {
 				display: flex;
 				justify-content: space-between;
 				padding: 0 0.2rem;
 				margin-bottom: 1rem;
 				h5 {
-					font-size: 0.95rem;
-					font-weight: 600;
-					color: $black-secondary;
+					font-size: 1rem;
+					font-weight: 500;
+					color: #212121;
 				}
 				span {
 					@include applyFlex(center, center);
@@ -194,6 +192,7 @@
 					width: 30px;
 					height: 30px;
 					border-radius: 5px;
+					font-weight: 500;
 					color: $color-primary;
 				}
 			}
@@ -201,8 +200,9 @@
 			.add-todo-btn {
 				width: 100%;
 				@include applyFlex(center, center);
-				@include buttonVariant(1.2rem, $color-primary, $todo-color, 10px);
+				@include buttonVariant(1.2rem, $color-primary, #ecf3f3, 10px);
 				padding: 0.2rem 0;
+				font-size: 1.4rem;
 			}
 
 			.todo-Card {
@@ -213,114 +213,126 @@
 	}
 
 	// todo styling
-	.todo-card {
+
+	.todo-box {
 		animation: fade-anim 0.5s ease;
+		margin: 0.8rem 0 1rem 0;
+		box-shadow: 0px 0px 28px 0px #48aeae12;
 		cursor: pointer;
 		width: 100%;
 		background-color: $white;
 		border-radius: 10px;
-		margin: 0.8rem 0 1rem 0;
-		padding: 1rem 1.2rem;
-		box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 
-		input {
-			font-size: 0.9rem;
-			margin-bottom: 0.1rem;
-		}
-		textarea {
-			font-size: 0.1rem;
-			margin-bottom: 0.5rem;
+		&.empty-card {
+			border: 1px solid #dbdbdb;
+			border-radius: 7px;
+			cursor: default;
+			padding: 1rem 1.2rem;
+
+			& .card-title {
+				font-size: 0.98rem;
+				margin-bottom: 0.5rem;
+				font-weight: 500;
+				color: #212121;
+			}
+
+			& .card-desc {
+				font-size: 0.88rem;
+				margin-bottom: 1rem;
+				font-weight: normal;
+				color: #6b6b6b;
+			}
+
+			.btn-group {
+				width: 100%;
+				@include applyFlex(space-evenly, center);
+
+				& > button {
+					padding: 0.2rem 1.25rem;
+					border-radius: 5px;
+					font-size: 0.95rem;
+					font-weight: 400;
+					width: 80px;
+					height: 30px;
+					cursor: pointer;
+					@include applyFlex(center, center);
+
+					&.disabled,
+					&[disabled] {
+						opacity: 0.6;
+						cursor: pointer;
+					}
+
+					&.save-btn {
+						background-color: $color-primary;
+						color: $white;
+						&:active {
+							background-color: darken($color-primary, 10%);
+						}
+					}
+
+					&.cancel-btn {
+						background-color: $white;
+						border: 1px solid $color-primary;
+						color: $color-primary;
+					}
+				}
+			}
+
+			input {
+				width: 100%;
+				font-size: 0.95rem;
+				color: darken(#a4abb3, 20%);
+
+				&::placeholder {
+					color: #a4abb3;
+				}
+			}
+
+			textarea {
+				width: 100%;
+				font-size: 0.88rem;
+				color: darken(#a4abb3, 10%);
+				&::placeholder {
+					color: #a4abb3;
+				}
+			}
 		}
 
 		&.moving {
 			background-color: $light-bg-green;
 		}
 
-		& > .card-title {
-			font-size: 1rem;
-			margin-bottom: 0.6rem;
-			color: $black-secondary;
-		}
-		& > .card-desc {
-			font-size: 0.88rem;
-			margin-bottom: 1rem;
-			color: #444;
-		}
+		.todo-card {
+			padding: 1rem 1.2rem;
 
-		& > .card-bottom {
-			@include applyFlex(space-between, center);
-			h1 {
-				font-size: 0.8rem;
-				color: #274662;
-			}
-
-			.card-btn {
-				display: flex;
-				gap: 20px;
-				button {
-					@include applyFlex(center, center);
-					width: 26px;
-					height: 26px;
-					font-size: 0.8rem;
-					color: #fff;
-					cursor: pointer;
-					border-radius: 5px;
-
-					&.edit-card {
-						background-color: $color-primary;
-					}
-
-					&.delete-card {
-						background-color: $color-danger;
-					}
-
-					&:active {
-						transform: scale(0.98);
-					}
-				}
-			}
-		}
-
-		&.empty-card .btn-group {
-			width: 100%;
-			display: flex;
-			align-items: center;
-			justify-content: space-evenly;
-
-			& > button {
-				padding: 0.2rem 1.2rem;
-				border-radius: 5px;
+			& .card-title {
 				font-size: 0.98rem;
-				width: 90px;
-				&.disabled,
-				&[disabled] {
-					opacity: 0.6;
-					cursor: pointer;
+				margin-bottom: 0.5rem;
+				font-weight: 500;
+				color: #212121;
+			}
+			& .card-desc {
+				font-size: 0.88rem;
+				margin-bottom: 1rem;
+				font-weight: normal;
+				color: #6b6b6b;
+			}
+
+			& .card-bottom {
+				@include applyFlex(space-between, center);
+
+				img {
+					height: 25.26px;
+					object-fit: contain;
 				}
 
-				&.save-btn {
-					background-color: $color-primary;
-					color: $white;
-					&:active {
-						background-color: darken($color-primary, 10%);
-					}
-				}
-
-				&.cancel-btn {
-					background-color: $white;
-					border: 1px solid $color-light-gray;
+				i.bi-chat-left {
+					color: #bebebe;
+					font-size: 0.92rem;
+					font-weight: normal;
 				}
 			}
-		}
-
-		input {
-			width: 100%;
-			font-size: 0.95rem;
-		}
-
-		textarea {
-			width: 100%;
-			font-size: 0.85rem;
 		}
 	}
 }

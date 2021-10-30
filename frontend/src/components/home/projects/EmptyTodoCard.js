@@ -55,7 +55,7 @@ const EmptyTodoCard = ({ heading, id }) => {
 	};
 
 	return (
-		<div className="todo-card empty-card">
+		<div className="todo-box empty-card">
 			<div className="card-title">
 				<input type="text" placeholder="Give your task a title" value={cardValues.title} onChange={changeTitle} />
 			</div>
@@ -64,7 +64,7 @@ const EmptyTodoCard = ({ heading, id }) => {
 			</textarea>
 			<div className="btn-group">
 				<button className="save-btn" disabled={!cardValues.title.trim() || !cardValues.desc.trim() || cardValues.isLoading} onClick={saveTodo}>
-					{cardValues.isLoading ? <Loader /> : "Save"}
+					{cardValues.isLoading ? <Loader /> : "Create"}
 				</button>
 				<button className="cancel-btn" onClick={removeTodo}>
 					Cancel
