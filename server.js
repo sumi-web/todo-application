@@ -17,15 +17,15 @@ const PORT = process.env.PORT || 3001;
 mongoose
 	.connect(process.env.SERVER_DB_URL)
 	.then(() => {
-		app.listen(PORT, (result) => {
+		app.listen(PORT, () => {
 			console.log(`mongoDb connected and server has been started at ${PORT}`);
 		});
 	})
 	.catch((err) => console.log("error in connecting in db"));
 
 //middleware
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.json({ limit: "30mb" }));
+app.use(express.urlencoded({ extended: true, limit: "30mb" }));
 app.use(cookieParser());
 
 // for production build

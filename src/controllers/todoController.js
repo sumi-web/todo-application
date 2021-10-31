@@ -8,7 +8,9 @@ export const CreateTodo = async (req, res) => {
 	try {
 		const result = await todo.save();
 
-		res.status(200).json({ data: result });
+		const data = await Todo.findById(result._id).populate("userId");
+
+		res.status(200).json({ data });
 	} catch (err) {
 		console.log("error found in saving todo", err);
 		res.status(400).send(err);
@@ -17,7 +19,7 @@ export const CreateTodo = async (req, res) => {
 
 export const GetAllTodo = async (req, res) => {
 	try {
-		const allTodo = await Todo.find();
+		const allTodo = await Todo.find().populate("userId");
 
 		if (allTodo) {
 			res.status(200).json({ data: allTodo });
@@ -32,10 +34,9 @@ export const UpdateTodo = async (req, res) => {
 	const { todoId, data } = req.body;
 
 	try {
-		const updatedTodo = await Todo.findByIdAndUpdate(todoId, data, { new: true });
+		const updatedTodo = await Todo.findByIdAndUpdate(todoId, data, { new: true }).populate("userId");
 		if (updatedTodo) {
 			res.status(200).json({ success: true, data: updatedTodo });
-			console.log("check updated todo", updatedTodo);
 		}
 	} catch (err) {
 		console.log("error in updating todo in server", err);

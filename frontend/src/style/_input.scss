@@ -44,6 +44,6 @@
 	}
 
 	&:focus-within {
-		border-color: $color-primary;
+		border-color: lighten($color-primary, 30%);
 	}
 }

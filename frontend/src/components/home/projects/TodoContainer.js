@@ -52,7 +52,7 @@ const TodoContainer = ({ heading, todoData }) => {
 										{...provided.draggableProps}
 										{...provided.dragHandleProps}
 									>
-										<TodoCard todoId={item._id} userId={item.userId} title={item.title} description={item.desc} status={item.status} />
+										<TodoCard todoId={item._id} userData={item.userId} title={item.title} description={item.desc} status={item.status} />
 									</div>
 								)}
 							</Draggable>

@@ -9,10 +9,8 @@ import defaultImage from "../../assets/image1.png";
 
 import { DeleteTodo, SetEditModalData } from "../../action/action-todo";
 
-const TodoCard = ({ userId, todoId, title, description, status, ...props }) => {
+const TodoCard = ({ userData, todoId, title, description, status, ...props }) => {
 	const dispatch = useDispatch();
-
-	// const userName = useSelector((state) => state.auth_store.userList.find((user) => user._id === userId)?.name || "");
 
 	const [delState, setDelState] = useState({
 		isOpen: false,
@@ -25,7 +23,7 @@ const TodoCard = ({ userId, todoId, title, description, status, ...props }) => {
 	});
 
 	const openEditModal = () => {
-		dispatch(SetEditModalData(userId, todoId, status));
+		dispatch(SetEditModalData(todoId, status));
 		setEditState({ ...editState, isOpen: true, isLoading: true });
 	};
 
@@ -50,7 +48,7 @@ const TodoCard = ({ userId, todoId, title, description, status, ...props }) => {
 				<h4 className="card-title">{title}</h4>
 				<p className="card-desc">{description}</p>
 				<div className="card-bottom">
-					<img src={defaultImage} alt="user" />
+					<img src={userData?.userImage ? userData.userImage : defaultImage} alt="user" />
 					<i className="bi bi-chat-left"></i>
 				</div>
 				<i className="bi bi-x" onClick={openDelModal}></i>

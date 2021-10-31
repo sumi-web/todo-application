@@ -1,4 +1,14 @@
-import { CREATE_EMPTY_TOKEN, DELETE_TODO, MOVE_SELECTED_TODO_CARD, REMOVE_EDIT_MODAL_DATA, REMOVE_EMPTY_TODO_CARD, SET_ALL_TODO, SET_CREATED_TODO, SET_EDIT_TODO_DATA, UPDATE_TODO } from "./type";
+import {
+	CREATE_EMPTY_TOKEN,
+	DELETE_TODO,
+	MOVE_SELECTED_TODO_CARD,
+	REMOVE_EDIT_MODAL_DATA,
+	REMOVE_EMPTY_TODO_CARD,
+	SET_ALL_TODO,
+	SET_CREATED_TODO,
+	SET_EDIT_TODO_DATA,
+	UPDATE_TODO,
+} from "./type";
 
 export const CreateEmptyTodo = (heading) => ({ type: CREATE_EMPTY_TOKEN, heading });
 
@@ -63,16 +73,7 @@ export const DeleteTodo = (todoId, status) => async (dispatch) => {
 	}
 };
 
-export const SetEditModalData = (userId, todoId, status) => (dispatch, getState) => {
-	const userList = getState().auth_store.userList;
-
-	const userName = userList.find((user) => user._id === userId).name;
-	if (userName) {
-		dispatch({ type: SET_EDIT_TODO_DATA, todoId, status, userName });
-	} else {
-		console.log("didn't find user todo");
-	}
-};
+export const SetEditModalData = (todoId, status) => ({ type: SET_EDIT_TODO_DATA, todoId, status });
 
 export const SaveEditedTodoData = (todoId, title, desc) => async (dispatch) => {
 	try {

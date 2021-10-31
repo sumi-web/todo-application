@@ -115,6 +115,7 @@
 			& > img {
 				height: 30px;
 				width: 180px;
+
 				object-fit: contain;
 			}
 
@@ -128,9 +129,9 @@
 					margin-right: 10px;
 				}
 				img {
-					height: 45px;
-					width: 45px;
-					// border-radius: 50%;
+					height: 48px;
+					width: 48px;
+					border-radius: 50%;
 					margin-left: 10px;
 				}
 			}
@@ -330,7 +331,6 @@
 
 		&.moving {
 			background-color: $light-bg-green;
-			transform: rotate(30deg);
 		}
 
 		.todo-card {
@@ -353,8 +353,9 @@
 				@include applyFlex(space-between, center);
 
 				img {
-					height: 25.26px;
-					object-fit: contain;
+					width: 26px;
+					height: 26px;
+					border-radius: 50%;
 				}
 
 				i.bi-chat-left {
@@ -462,7 +463,7 @@
 
 .edit-todo-modal {
 	@include applyFlex(space-between, stretch);
-	padding: 2rem 1.5rem 1.2rem 1.5rem;
+	padding: 1rem 1.5rem 1.2rem 1.5rem;
 	flex-direction: column;
 	width: 520px;
 	min-height: 75vh;
@@ -503,10 +504,12 @@
 
 		.user-info {
 			display: flex;
-			gap: 10px;
+			align-items: center;
+			gap: 15px;
 			img {
+				width: 30px;
 				height: 30px;
-				object-fit: contain;
+				border-radius: 50%;
 			}
 		}
 
@@ -518,7 +521,8 @@
 	}
 
 	.edit-desc {
-		@include applyFlex(flex-start, center);
+		display: flex;
+		align-items: center;
 		gap: 40px;
 		margin-bottom: 2rem;
 

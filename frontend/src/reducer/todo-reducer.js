@@ -83,8 +83,8 @@ export function todoReducer(state = INITIAL_STATE, action) {
 	}
 
 	if (action.type === SET_EDIT_TODO_DATA) {
-		const todoData = state[action.status].list.find((todo) => todo._id === action.todoId);
-		newState.editTodo = { ...todoData, userName: action.userName };
+		newState.editTodo = state[action.status].list.find((todo) => todo._id === action.todoId);
+
 		return newState;
 	}
 
@@ -102,5 +102,5 @@ export function todoReducer(state = INITIAL_STATE, action) {
 		return newState;
 	}
 
-	return newState;
+	return state;
 }

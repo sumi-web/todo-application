@@ -53,13 +53,13 @@ const EditTodoModal = ({ isOpen, isLocked, onClose, action }) => {
 					<div className="edit-created-by">
 						<h5>Created By</h5>
 						<div className="user-info">
-							<img src={userImage} alt="user" />
-							<h4>{todoData.userName}</h4>
+							<img src={todoData.userId?.userImage ? todoData.userId.userImage : userImage} alt="user" />
+							<h4>{todoData.userId?.name || ""}</h4>
 						</div>
 					</div>
 					<div className="edit-desc">
 						<h5>Description</h5>
-						<textarea placeholder="Description..." rows={4} value={inputValues.desc} onChange={changeDesc} />
+						<textarea placeholder="Description..." rows={3} value={inputValues.desc} onChange={changeDesc} />
 					</div>
 				</div>
 

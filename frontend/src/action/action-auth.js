@@ -80,14 +80,14 @@ export const GetAllUsers = () => async (dispatch) => {
 	}
 };
 
-export const UpdateUserInfo = (name, email) => async (dispatch, getState) => {
+export const UpdateUserInfo = (name, email, file) => async (dispatch, getState) => {
 	const userId = getState().auth_store.authCredentials._id;
 
 	try {
 		const res = await fetch("/auth/update-user", {
 			method: "PATCH",
 			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({ userId, data: { name, email } }),
+			body: JSON.stringify({ userId, data: { name, email, userImage: file } }),
 		});
 
 		const data = await res.json();

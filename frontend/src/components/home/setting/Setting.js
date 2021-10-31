@@ -2,10 +2,11 @@ import React, { useState, useEffect } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 
-import userImage from "../../../assets/image1.png";
+import FileBase64 from "react-file-base64";
 
 import Input from "../../common/Input";
 import Loader from "../../common/Loader";
+import userImage from "../../../assets/image1.png";
 
 import { UpdateUserInfo } from "../../../action/action-auth";
 
@@ -21,13 +22,18 @@ const Setting = () => {
 
 	const [email, setEmail] = useState("");
 
+	const [file, setFile] = useState("");
+
 	const [isLoading, setIsLoading] = useState(false);
 
 	const dispatch = useDispatch();
 
+	console.log("check file", file);
+
 	useEffect(() => {
 		setEmail(userData.email);
 		setFullName(userData.name);
+		setFile(userData.userImage);
 	}, [userData]);
 
 	const editName = () => {
@@ -55,10 +61,10 @@ const Setting = () => {
 	};
 
 	const saveEditedUserDetails = async () => {
-		if (!fullName && !email) return;
+		if (!fullName && !email && !!file) return;
 
 		setIsLoading(true);
-		await dispatch(UpdateUserInfo(fullName, email));
+		await dispatch(UpdateUserInfo(fullName, email, file));
 		setIsLoading(false);
 		setFieldVisibility({ nameField: false, emailField: false });
 	};
@@ -66,7 +72,14 @@ const Setting = () => {
 	return (
 		<div className="setting-screen">
 			<div className="user-image">
-				<img src={userImage} alt="user-defined" />
+				<img src={file ? file : userImage} alt="user-defined" />
+
+				<div className="edit-image-box">
+					<label>
+						<i class="bi bi-pencil-square"></i>
+						<FileBase64 multiple={false} onDone={({ base64 }) => setFile(base64)} />
+					</label>
+				</div>
 			</div>
 
 			<div className="user-info-box">
@@ -83,7 +96,12 @@ const Setting = () => {
 					{fieldVisibility.emailField ? <Input placeholder="Email" value={email} onChange={changeEmail} /> : <h4>{userData.email}</h4>}
 				</div>
 			</div>
-			<button disabled={isLoading || (!fullName && !email) || (userData.name === fullName.trim() && userData.email === email.trim())} onClick={saveEditedUserDetails}>
+			<button
+				disabled={
+					isLoading || (!fullName && !email && !file) || (userData.name === fullName.trim() && userData.email === email.trim() && userData.userImage === file)
+				}
+				onClick={saveEditedUserDetails}
+			>
 				{isLoading ? <Loader /> : "Save"}
 			</button>
 		</div>

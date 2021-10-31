@@ -21,7 +21,7 @@ const HeaderBar = () => {
 				<div className="user-info">
 					<h1>Hi {userInfo.name}</h1>
 					<Link to="/home/settings">
-						<img src={UserImage} alt="user" />
+						<img src={userInfo.userImage ? userInfo.userImage : UserImage} alt="user" />
 					</Link>
 				</div>
 			</div>
