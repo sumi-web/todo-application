@@ -3,9 +3,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import SearchBox from "../common/SearchBox";
-import AllImages from "../../assets/all-images.png";
 import UserImage from "../../assets/image1.png";
 import { useSelector } from "react-redux";
+import UserImages from "../common/UserImages";
 
 const HeaderBar = () => {
 	const userInfo = useSelector((state) => state.auth_store.authCredentials);
@@ -16,8 +16,7 @@ const HeaderBar = () => {
 				<div className="search-box">
 					<SearchBox placeholder="Search.." />
 				</div>
-
-				<img className="all-images" src={AllImages} alt="all-images" />
+				<UserImages />
 				<div className="user-info">
 					<h1>Hi {userInfo.name}</h1>
 					<Link to="/home/settings">

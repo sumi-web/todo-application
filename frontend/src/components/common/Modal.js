@@ -44,7 +44,7 @@ export default function Modal({ open, onClose, locked, className, children }) {
 		<>
 			{(open || active) && (
 				<Portal className={className || "modal-portal"}>
-					<div ref={backdrop} className={active && open && "active"}>
+					<div ref={backdrop} className={active ? (open ? "active" : undefined) : undefined}>
 						<div className="modal-content">{children}</div>
 					</div>
 				</Portal>

@@ -591,3 +591,143 @@
 		opacity: 1;
 	}
 }
+
+.user-image-group {
+	display: flex;
+	position: relative;
+	left: -20px;
+
+	cursor: pointer;
+
+	img {
+		position: relative;
+		width: 30px;
+		height: 30px;
+		border-radius: 50%;
+	}
+
+	img.user0 {
+		z-index: 10;
+	}
+
+	img.user1 {
+		left: -5px;
+		z-index: 8;
+	}
+
+	img.user2 {
+		left: -8px;
+		z-index: 6;
+	}
+
+	img.user3 {
+		left: -10px;
+		z-index: 4;
+	}
+
+	.last-image {
+		position: relative;
+		left: -12px;
+		z-index: 2;
+		width: 30px;
+		height: 30px;
+
+		small {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			color: #9a9a9a;
+			font-size: 0.8rem;
+		}
+	}
+}
+
+.all-users-list {
+	position: relative;
+	width: 450px;
+	min-height: 400px;
+	padding: 0 0.5rem l;
+	@include applyFlex(space-evenly, stretch);
+	flex-direction: column;
+	gap: 15px;
+
+	.head {
+		position: relative;
+		@include applyFlex(space-between, center);
+
+		&::before {
+			content: "";
+			position: absolute;
+			bottom: -5px;
+			left: 0;
+			width: 30px;
+			height: 3px;
+			background-color: $color-primary;
+		}
+
+		h4 {
+			font-weight: 500;
+			color: #212121;
+			font-size: 1.08rem;
+		}
+
+		i.bi-x {
+			font-size: 1.8rem;
+			color: #0000004a;
+			cursor: pointer;
+		}
+	}
+
+	.user-container {
+		@include applyFlex(flex-start, stretch);
+		flex-direction: column;
+		max-height: 350px;
+		overflow-y: scroll;
+		padding: 1rem 0 1.5rem 0;
+
+		/* width */
+		&::-webkit-scrollbar {
+			width: 5px;
+		}
+
+		/* Track */
+		&::-webkit-scrollbar-track {
+			box-shadow: inset 0 0 5px #eeeeee8a;
+			border-radius: 10px;
+		}
+
+		/* Handle */
+		&::-webkit-scrollbar-thumb {
+			background: #e4e5e8;
+			border-radius: 10px;
+		}
+
+		.user-card {
+			@include applyFlex(flex-start, center);
+			padding: 1rem;
+			gap: 15px;
+			img {
+				width: 47px;
+				height: 47px;
+				border-radius: 50%;
+			}
+			.user-info {
+				@include applyFlex(flex-start, flex-start);
+				flex-direction: column;
+
+				h5 {
+					font-weight: 500;
+					color: #212121;
+					font-size: 0.98rem;
+				}
+
+				p {
+					color: #21212194;
+					font-size: 0.88rem;
+					font-weight: normal;
+				}
+			}
+		}
+	}
+}

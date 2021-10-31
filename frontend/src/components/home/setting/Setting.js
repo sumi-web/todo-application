@@ -76,7 +76,7 @@ const Setting = () => {
 
 				<div className="edit-image-box">
 					<label>
-						<i class="bi bi-pencil-square"></i>
+						<i className="bi bi-pencil-square"></i>
 						<FileBase64 multiple={false} onDone={({ base64 }) => setFile(base64)} />
 					</label>
 				</div>
