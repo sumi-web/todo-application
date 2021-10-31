@@ -105,7 +105,7 @@ const Login = () => {
 			setInputError(error);
 		} else {
 			setInputValues({ ...inputValues, isLoading: true });
-			const data = await dispatch(LoginUser(inputValues.email, inputValues.password));
+			const data = await dispatch(LoginUser(inputValues.email.trim(), inputValues.password.trim()));
 			setInputValues({ ...inputValues, isLoading: false });
 
 			if (data.isLoggedIn) {

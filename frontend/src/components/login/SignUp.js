@@ -6,6 +6,7 @@ import { useHistory } from "react-router-dom";
 import Input from "../common/Input";
 import Loader from "../common/Loader";
 import FormHead from "../common/FormHead";
+import Checkbox from "../common/Checkbox";
 
 import { SignUpUser } from "../../action/action-auth";
 
@@ -24,6 +25,8 @@ const SignUp = () => {
 	});
 
 	const [inputError, setInputError] = useState({});
+
+	const [rememberMe, setRememberMe] = useState(false);
 
 	const changeInputValues = ({ target: { name, value } }) => {
 		const valuesObj = { ...inputValues, [name]: value };
@@ -98,17 +101,26 @@ const SignUp = () => {
 
 	const userSignUp = async () => {
 		if (inputValues.isLoading) return;
+
 		const error = checkErrorsBeforeSaving();
 
 		if (Object.keys(error).length > 0) {
 			setInputError(error);
 		} else {
 			setInputValues({ ...inputValues, isLoading: true });
-			const data = await dispatch(SignUpUser(inputValues.fullName, inputValues.email, inputValues.password));
+			const data = await dispatch(SignUpUser(inputValues.fullName.trim(), inputValues.email.trim(), inputValues.password.trim()));
 
 			setInputValues({ ...inputValues, isLoading: false });
 			if (data.isLoggedIn) {
 				// navigate to dashboard
+				if (rememberMe) {
+					localStorage.setItem("rememberMe", rememberMe);
+					localStorage.setItem("email", inputValues.email);
+					localStorage.setItem("password", inputValues.password);
+				} else {
+					localStorage.clear();
+				}
+
 				history.push("/home/projects");
 			} else {
 				if (data.error === "email already exist") {
@@ -165,6 +177,7 @@ const SignUp = () => {
 				<button disabled={inputValues.isLoading} type="button" onClick={userSignUp}>
 					{inputValues.isLoading ? <Loader /> : "Sign Up"}
 				</button>
+				<Checkbox isChecked={rememberMe} changeCheck={() => setRememberMe((prev) => !prev)} />
 			</div>
 		</div>
 	);

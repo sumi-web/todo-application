@@ -39,7 +39,6 @@ export function todoReducer(state = INITIAL_STATE, action) {
 	}
 
 	if (action.type === SET_CREATED_TODO) {
-		debugger;
 		const newList = state[action.status].list.filter((item) => item.title !== "" && item.desc !== "");
 		newState[action.status].list = [action.todo, ...newList];
 
@@ -78,7 +77,6 @@ export function todoReducer(state = INITIAL_STATE, action) {
 	}
 
 	if (action.type === DELETE_TODO) {
-		debugger;
 		newState[action.status].list = state[action.status].list.filter((todo) => todo._id !== action.todoId);
 
 		return newState;
@@ -91,7 +89,9 @@ export function todoReducer(state = INITIAL_STATE, action) {
 	}
 
 	if (action.type === UPDATE_TODO) {
-		newState[action.data.status].list = state[action.data.status].list.map((todo) => (todo._id === action.data._id ? { ...todo, ...action.data } : { ...todo }));
+		newState[action.data.status].list = state[action.data.status].list.map((todo) =>
+			todo._id === action.data._id ? { ...todo, ...action.data } : { ...todo }
+		);
 
 		newState.editTodo = {};
 		return newState;

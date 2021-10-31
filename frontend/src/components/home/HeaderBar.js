@@ -1,5 +1,7 @@
 import React from "react";
 
+import { Link } from "react-router-dom";
+
 import SearchBox from "../common/SearchBox";
 import AllImages from "../../assets/all-images.png";
 import UserImage from "../../assets/image1.png";
@@ -18,7 +20,9 @@ const HeaderBar = () => {
 				<img className="all-images" src={AllImages} alt="all-images" />
 				<div className="user-info">
 					<h1>Hi {userInfo.name}</h1>
-					<img src={UserImage} alt="user" />
+					<Link to="/home/settings">
+						<img src={UserImage} alt="user" />
+					</Link>
 				</div>
 			</div>
 

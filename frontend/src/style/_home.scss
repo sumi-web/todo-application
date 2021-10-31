@@ -24,6 +24,7 @@
 		}
 
 		.nav-title {
+			font-weight: 500;
 			font-size: 1.2rem;
 			margin-bottom: 2rem;
 			color: #161616;
@@ -36,7 +37,7 @@
 			display: flex;
 			align-items: flex-end;
 			gap: 23px;
-			font-size: 1.1rem;
+			font-size: 1.05rem;
 			margin-bottom: 35px;
 			font-weight: 400;
 			&:hover {
@@ -102,8 +103,8 @@
 				input {
 					width: 100%;
 					height: 20px;
-					font-size: 1.02rem;
 					background: transparent;
+					font-size: 0.98rem;
 					color: #1a3b58;
 					&::placeholder {
 						color: #9a9a9a;
@@ -170,8 +171,6 @@
 			border-radius: 10px;
 			width: 100%;
 			background-color: #f5f9f9;
-			// min-height: 550px;
-			// max-height: 530px;
 			height: 76vh;
 			min-height: calc(80vh-2rem);
 			overflow-y: auto;
@@ -232,12 +231,12 @@
 			position: absolute;
 			top: 2px;
 			right: 2px;
-			width: 23px;
-			height: 23px;
+			width: 30px;
+			height: 30px;
 			background-color: #f9f9f9;
 			color: #4a4a4a;
-			font-size: 1.4rem;
-			border-radius: 6px;
+			font-size: 1.5rem;
+			border-radius: 6px 8px 6px 6px;
 			visibility: hidden;
 			box-shadow: 0px 0px 28px 0px #48aeae12;
 		}
@@ -331,6 +330,7 @@
 
 		&.moving {
 			background-color: $light-bg-green;
+			transform: rotate(30deg);
 		}
 
 		.todo-card {
@@ -372,9 +372,10 @@
 	height: 100%;
 	padding: 0.5rem;
 	h2 {
-		font-size: 1.2rem;
+		font-size: 1.1rem;
 		margin-bottom: 1.2rem;
 		font-weight: 400;
+		color: #212121;
 	}
 
 	.confirm-btn {
@@ -384,9 +385,11 @@
 		& > button {
 			padding: 0.2rem 1.2rem;
 			border-radius: 5px;
-			font-size: 0.98rem;
+			font-size: 0.95rem;
 			cursor: pointer;
-			width: 90px;
+			width: 85px;
+			height: 30px;
+			@include applyFlex(center, center);
 
 			&.logout-btn {
 				background-color: $color-primary;
@@ -403,65 +406,113 @@
 
 			&.cancel-btn {
 				background-color: $white;
-				border: 1px solid $color-light-gray;
+				color: $color-primary;
+				border: 1px solid $color-primary;
 			}
 		}
 	}
 }
 
 // edit todo modal
-.edit-todo-modal {
-	position: relative;
-	display: flex;
-	padding: 2rem 1.5rem 0 1.5rem;
 
-	justify-content: flex-start;
-	flex-direction: column;
-	width: 680px;
-	min-height: 350px;
-	i.bi-x-lg {
-		position: absolute;
-		top: -8px;
+.edit-todo-screen > div {
+	position: fixed;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	top: 0;
+	background-color: rgba(51, 51, 51, 0.1);
+	opacity: 1;
+	transition: all 100ms cubic-bezier(0.4, 0, 0.2, 1);
+	transition-delay: 200ms;
+	@include applyFlex(center, center);
+
+	& > .modal-content {
+		position: fixed;
 		right: 0;
-		font-size: 1.8rem;
-		cursor: pointer;
-		width: 35px;
-		height: 35px;
-		@include applyFlex(center, center);
-		background-color: $light-bg-green;
+		bottom: 0;
+		padding: 15px;
+		box-sizing: border-box;
+		min-height: 50px;
+		min-width: 50px;
+		max-height: 80%;
+		max-width: 80%;
+		box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+		background-color: white;
+		border-radius: 5px;
+		transform: translateY(100px);
+		transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+		opacity: 0;
+		max-width: 700px;
+		max-height: 800px;
 	}
 
-	label {
+	&.active {
+		transition-duration: 250ms;
+		transition-delay: 0ms;
+		opacity: 1;
+		& .modal-content {
+			transform: translateY(0);
+			opacity: 1;
+			transition-delay: 150ms;
+			transition-duration: 350ms;
+		}
+	}
+}
+
+.edit-todo-modal {
+	@include applyFlex(space-between, stretch);
+	padding: 2rem 1.5rem 1.2rem 1.5rem;
+	flex-direction: column;
+	width: 520px;
+	min-height: 75vh;
+
+	input {
+		color: #212121;
 		font-size: 1.05rem;
-		font-family: "Montserrat", sans-serif;
-		margin-bottom: 0.5rem;
 		font-weight: 500;
-		color: $black-secondary;
+		width: 100%;
+		height: 40px;
+		padding: 0.2rem 0.3rem;
+		border-radius: 5px;
+		margin-bottom: 0.4rem;
+		&:focus {
+			border: 1px solid rgba(0, 0, 0, 0.2);
+		}
 	}
 
-	.edit-title {
+	.edit-title-bar {
 		display: flex;
-		justify-content: flex-start;
-		flex-direction: column;
-		margin-bottom: 2rem;
-		color: $black-secondary;
+		width: 35px;
+		height: 3px;
+		background-color: $color-primary;
+		margin-bottom: 3rem;
+		margin-left: 5px;
+	}
+
+	h5 {
+		color: #6b6b6b;
 		font-weight: 400;
+		font-size: 0.9rem;
 	}
 
 	.edit-created-by {
 		@include applyFlex(flex-start, center);
-		gap: 40px;
-		margin-bottom: 2rem;
+		gap: 50px;
+		margin-bottom: 2.5rem;
 
-		h5 {
-			color: $color-medium-gray;
-			font-weight: 400;
-			font-size: 0.98rem;
+		.user-info {
+			display: flex;
+			gap: 10px;
+			img {
+				height: 30px;
+				object-fit: contain;
+			}
 		}
 
 		h4 {
-			color: $black-secondary;
-			font-size: 1.1rem;
+			color: #2e2e2e;
+			font-size: 1rem;
 			font-weight: 400;
 		}
 	}
@@ -470,33 +521,52 @@
 		@include applyFlex(flex-start, center);
 		gap: 40px;
 		margin-bottom: 2rem;
-		h5 {
-			color: $color-medium-gray;
-			font-weight: 500;
-			font-size: 0.98rem;
-		}
+
 		textarea {
 			width: 100%;
+			color: #2e2e2e;
 			height: 100%;
 			min-height: 50px;
-			border: 1px solid $color-light-gray;
 			padding: 0.2rem 0.5rem;
-			font-size: 1rem;
+			font-size: 0.9rem;
 			color: $black-secondary;
 			border-radius: 5px;
 			max-height: 120px;
 			&:focus {
-				border: 1px solid $color-primary;
+				border: 1px solid rgba(0, 0, 0, 0.2);
 			}
 		}
 	}
 
-	button {
-		width: 100px;
-		@include buttonVariant(1.2rem, $white, $color-primary, 5px);
-		width: 110px;
-		margin: 0 auto;
-		padding: 0.3rem 1rem;
+	.edit-btn-group {
+		@include applyFlex(center, stretch);
+		padding: 2rem 1rem;
+		gap: 60px;
+
+		button {
+			// @include buttonVariant(1.2rem, $white, $color-primary, 5px);
+			width: 150px;
+			height: 36px;
+			border-radius: 5px;
+			padding: 0.3rem 1rem;
+			cursor: pointer;
+
+			&:disabled,
+			&.disabled {
+				opacity: 0.7;
+			}
+
+			&.save-btn {
+				color: $white;
+				background-color: $color-primary;
+			}
+
+			&.cancel-btn {
+				color: $color-primary;
+				background-color: $white;
+				border: 1px solid $color-primary;
+			}
+		}
 	}
 }
 

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 
 import { Portal } from "../Portal";
 
-export default function Modal({ open, onClose, locked, children }) {
+export default function Modal({ open, onClose, locked, className, children }) {
 	const backdrop = useRef(null);
 	const [active, setActive] = useState(false);
 
@@ -43,7 +43,7 @@ export default function Modal({ open, onClose, locked, children }) {
 	return (
 		<>
 			{(open || active) && (
-				<Portal className="modal-portal">
+				<Portal className={className || "modal-portal"}>
 					<div ref={backdrop} className={active && open && "active"}>
 						<div className="modal-content">{children}</div>
 					</div>
