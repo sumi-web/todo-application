@@ -28,8 +28,6 @@ const Setting = () => {
 
 	const dispatch = useDispatch();
 
-	console.log("check file", file);
-
 	useEffect(() => {
 		setEmail(userData.email);
 		setFullName(userData.name);
