@@ -33,6 +33,11 @@ const TodoCard = ({ userId, todoId, title, description, status, ...props }) => {
 		setEditState({ ...editState, isOpen: false, isLoading: false });
 	};
 
+	const openDelModal = (e) => {
+		e.stopPropagation();
+		setDelState({ ...delState, isOpen: true });
+	};
+
 	const deleteCard = async () => {
 		setDelState({ ...delState, isLoading: true });
 		await dispatch(DeleteTodo(todoId, status));
@@ -45,12 +50,19 @@ const TodoCard = ({ userId, todoId, title, description, status, ...props }) => {
 				<h4 className="card-title">{title}</h4>
 				<p className="card-desc">{description}</p>
 				<div className="card-bottom">
-					<img src={defaultImage} alt="user image" />
-					<i class="bi bi-chat-left"></i>
+					<img src={defaultImage} alt="user" />
+					<i className="bi bi-chat-left"></i>
 				</div>
-				<i class="bi bi-x"></i>
+				<i className="bi bi-x" onClick={openDelModal}></i>
 			</div>
-			<ConfirmModal isOpen={delState.isOpen} isLoading={delState.isLoading} title="Delete" onClose={() => setDelState({ ...delState, isOpen: false })} action={deleteCard} />
+
+			<ConfirmModal
+				isOpen={delState.isOpen}
+				isLoading={delState.isLoading}
+				title="Delete"
+				onClose={() => setDelState({ ...delState, isOpen: false })}
+				action={deleteCard}
+			/>
 			<EditTodoModal isOpen={editState.isOpen} isLocked={editState.isLocked} onClose={closeEditModal} />
 		</>
 	);

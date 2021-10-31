@@ -4,7 +4,7 @@
 	.sidebar-container {
 		height: 100vh;
 		align-self: flex-start;
-		padding: 25px 75px 50px 50px;
+		padding: 25px 75px 30px 50px;
 		background-color: white;
 		position: sticky;
 		top: 0;
@@ -24,8 +24,8 @@
 		}
 
 		.nav-title {
-			font-size: 1.5rem;
-			margin-bottom: 2.5rem;
+			font-size: 1.2rem;
+			margin-bottom: 2rem;
 			color: #161616;
 			letter-spacing: 0.03em;
 		}
@@ -37,7 +37,7 @@
 			align-items: flex-end;
 			gap: 23px;
 			font-size: 1.1rem;
-			margin-bottom: 40px;
+			margin-bottom: 35px;
 			font-weight: 400;
 			&:hover {
 				opacity: 0.8;
@@ -72,14 +72,15 @@
 .right-section {
 	height: 100vh;
 	flex: 0.82;
-	padding: 1rem 1.2rem;
+
 	//projects related styling
 	.top-header-bar {
 		width: 100%;
 		display: flex;
 		flex-direction: column;
-		margin-bottom: 0.8rem;
-
+		height: 20vh;
+		gap: 16px;
+		padding: 1rem;
 		.top {
 			@include applyFlex(space-between, center);
 			.search-box {
@@ -89,7 +90,7 @@
 					display: flex;
 					align-items: center;
 					height: 40px;
-					padding: 0.5rem 1rem;
+					padding: 0.5rem 0.2rem;
 					min-width: 200px;
 				}
 				i {
@@ -137,7 +138,6 @@
 		.bottom {
 			.projects-filter-bar {
 				@include applyFlex(space-between, center);
-				margin: 1.4rem 0 0.5rem 0;
 				h2 {
 					font-size: 1.4rem;
 					font-weight: 500;
@@ -162,14 +162,18 @@
 	.todo-container-area {
 		display: flex;
 		justify-content: space-evenly;
+		gap: 30px;
+		height: 80vh;
+		padding: 0 2rem;
 		.todo-container {
-			margin: 0 10px;
-			padding: 1.5rem 2rem;
+			padding: 1.2rem 2rem;
 			border-radius: 10px;
 			width: 100%;
 			background-color: #f5f9f9;
-			min-height: 550px;
-			max-height: 530px;
+			// min-height: 550px;
+			// max-height: 530px;
+			height: 76vh;
+			min-height: calc(80vh-2rem);
 			overflow-y: auto;
 
 			&.dragover {
@@ -201,7 +205,7 @@
 				width: 100%;
 				@include applyFlex(center, center);
 				@include buttonVariant(1.2rem, $color-primary, #ecf3f3, 10px);
-				padding: 0.2rem 0;
+				padding: 0.1rem 0;
 				font-size: 1.4rem;
 			}
 
@@ -224,21 +228,27 @@
 		background-color: $white;
 		border-radius: 10px;
 		i.bi-x {
-			display: block;
+			@include applyFlex(center, center);
 			position: absolute;
-			top: 0;
-			right: 5px;
-			width: 20px;
-			height: 20px;
-			// background-color: ;
-			font-size: 1.5rem;
-			transition: all 0.3s ease-in-out;
+			top: 2px;
+			right: 2px;
+			width: 23px;
+			height: 23px;
+			background-color: #f9f9f9;
+			color: #4a4a4a;
+			font-size: 1.4rem;
+			border-radius: 6px;
+			visibility: hidden;
+			box-shadow: 0px 0px 28px 0px #48aeae12;
 		}
 
 		&:hover {
 			i.bi-x {
-				display: block;
+				visibility: visible;
 				transition: all 0.3s ease-in-out;
+				&:hover {
+					background-color: #ecf3f3;
+				}
 			}
 		}
 
