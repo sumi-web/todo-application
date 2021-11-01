@@ -29,9 +29,9 @@ app.use(express.urlencoded({ extended: true, limit: "30mb" }));
 app.use(cookieParser());
 
 // for production build
-if (process.env.NODE_ENV === "Production") {
-	app.use(express.static("frontend/build"));
-}
+// if (process.env.NODE_ENV === "Production") {
+app.use(express.static("frontend/build"));
+// }
 
 // routing middleware
 app.use("/auth", authRouter);
